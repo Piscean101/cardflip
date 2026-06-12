@@ -1,8 +1,15 @@
 :root {
-    --goodGreen: rgb(0, 189, 0);
     --welcomePageBgColor: rgb(0, 110, 20);
-    --fancyBgOne: linear-gradient(to bottom, rgb(50, 25, 0), rgb(50,25,0), rgb(50,25,0), rgb(90,43,0), rgb(0, 189, 0));
-    --secondaryColor: gold;
+    --boardPageBgColor: rgb(59, 59, 59);
+    --mainBrown: rgb(50,25, 0);
+    --secondaryBrown: rgb(90,43,0);
+    --goodGreen: rgb(0, 189, 0);
+    --fadedGreen: rgba(0, 189, 0, 0.75);
+    --fancyBgOne: linear-gradient(to bottom, var(--mainBrown), var(--secondaryBrown), var(--secondaryBrown), var(--secondaryBrown), var(--secondaryBrown), var(--secondaryBrown), var(--fadedGreen));
+    --secondaryColor: rgba(255, 221, 32, 0.7);
+    --easyDifficulty: rgb(71, 71, 255);
+    --mediumDifficulty: rgb(255, 191, 72);
+    --text: grey;
 }
 body {
     display: flex;
@@ -11,9 +18,6 @@ body {
     height: 100vh;
     width: 99vw;
     overflow: hidden;
-}
-body#welcomePageBg {
-    background-color: var(--welcomePageBgColor);
 }
 a {
     position: relative;
@@ -24,6 +28,16 @@ a {
 }
 button {
     position: relative;
+    box-sizing: border-box;
+}
+button#backHome {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: Impact;
+    color: var(--text);
+    background-color: transparent;
+    border: 1px solid var(--text);
 }
 button:hover {
     cursor: pointer;
@@ -31,17 +45,39 @@ button:hover {
 a.active, button.active {
     transform: translateY(-50px);
 }
+body#boardPageBg {
+    background-color: var(--mainBrown);
+}
+body#welcomePageBg {
+    background-color: var(--welcomePageBgColor);
+}
+td { 
+    text-align: center; 
+    position: relative;
+}
+td #cardCount {
+    position: absolute;
+    top: 110%;
+}
+
+
+
+/** WELCOME PAGE **/
+
+
+
 .homeBtn {
-    transition: all 700ms ease;
+    transition: all 600ms ease;
     border: 0.25rem solid var(--secondaryColor);
     border-radius: 150px;
+    background-color: var(--secondaryBrown);
 }
 #playBtn {
     padding: 10px 20px;
     color: var(--secondaryColor);
     font-family: 'Franklin Gothic Medium';
     font-size: 15rem;
-    background-image: var(--fancyBgOne);
+    box-shadow: 0px 0px 15px 3px inset var(--goodGreen);
     padding: 0px 7rem;
     position: absolute;
 }
@@ -49,17 +85,90 @@ a.active, button.active {
     font-size: 2rem;
     font-weight: bold;
     margin: 1rem;
+    padding: 0.5rem 2rem;
+    max-width: 7rem;
+    display: flex;
+    justify-content: center;
+    border-width: 0.15rem;
 }
+#levelSelectContainer {
+    width: 75vw;
+    height: 100vh;
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}   
 .levelSelectDisplay {
     position: absolute;
     top: 20%;
     font-family: Impact;
 }
 .homeBtn:hover {
-    box-shadow: 0px 0px 15px 4px var(--secondaryColor);
+    /* box-shadow: 0px 0px 15px 4px var(--secondaryColor); */
     letter-spacing: 0.2rem;
+    border: none;
 }
 #playBtn:hover {
+    border: none;
     color: var(--goodGreen);
     -webkit-text-stroke: 0.2rem var(--secondaryColor);
 }
+#play5x5 { color: var(--easyDifficulty) }
+#play5x5:hover { box-shadow: 0px 0px 12px 3px inset var(--easyDifficulty)}
+#play6x6 { color: var(--mediumDifficulty) }
+#play6x6:hover { box-shadow: 0px 0px 12px 3px inset var(--mediumDifficulty)};
+
+
+
+
+/** BOARD PAGES **/
+
+
+
+.card {
+    height: 1rem;
+    width: 1rem;
+}
+#boardRow {
+    height: 65vh;
+    width: 70vw;
+    display: flex;
+    background-color: blue;
+    position: relative;
+    left: 0;
+    transform: translateX(25%);
+}
+#board {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+    padding: 2rem;
+}
+#board .card {
+    border: 2px solid orange;
+    padding: 1rem;
+    width: 2%;
+    display: flex;
+    justify-content: center;
+    margin: 1%;
+    font-family: consolas;
+    font-weight: bold;
+}
+#controlPanel {
+    height: 25vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#boardContainer tr {
+    /* border: 1px solid green; */
+}
+table {
+    height: 90vh;
+    /* border: 1px solid red; */
+}
+.gameUI { border: 1px solid white; color: white; padding: 3rem }
