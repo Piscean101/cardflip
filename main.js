@@ -1,4 +1,4 @@
-import { startGame } from "./board.js";
+import { checkMatch, startGame, deck, cardPanel, updateCardPanel } from "./board.js";
 document.addEventListener('DOMContentLoaded', () => {
     
     const playBtn = document.getElementById('playBtn');
@@ -25,6 +25,10 @@ document.addEventListener('DOMContentLoaded', () => {
             pressPlay();
         };
 
+        if (e.target.id == 'startBtn') {
+            startGame();
+        }
+
         if  (e.target.id == 'backHome') {
             localStorage.setItem('redir','true');
             window.location = "../";
@@ -35,7 +39,26 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location = `./levels/${level}.html`;
         };
 
+        if (e.target.classList.contains('facedown')) {
+            // var disableClick = document.querySelectorAll('facedown');
+            // disableClick.forEach((e) => { e.target.classList.add('noclick')});
+            e.target.classList.remove('facedown');
+            if (checkMatch(e.target)) {
+                e.target.classList.add('correct');
+                setTimeout(() => { 
+                    e.target.classList.add('found');
+                    cardPanel.shift();
+                    updateCardPanel();
+                    // disableClick.forEach((e) => e.target.classList.remove('noclick'))
+                },1500)
+            } else {
+                setTimeout(() => {
+                    e.target.classList.add('facedown');
+                },1000);
+            }
+        }
+
     });
 
 });
-startGame();
+// startGame();

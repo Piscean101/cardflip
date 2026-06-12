@@ -10,6 +10,7 @@
     --easyDifficulty: rgb(71, 71, 255);
     --mediumDifficulty: rgb(255, 191, 72);
     --text: grey;
+    --facedown: rgb(142, 0, 0);
 }
 body {
     display: flex;
@@ -82,14 +83,15 @@ td #cardCount {
     position: absolute;
 }
 .levelSelectBtn {
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
     margin: 1rem;
-    padding: 0.5rem 2rem;
-    max-width: 7rem;
+    padding: 0.5rem 3rem;
+    max-width: 8rem;
     display: flex;
     justify-content: center;
     border-width: 0.15rem;
+    font-family: consolas;
 }
 #levelSelectContainer {
     width: 75vw;
@@ -106,7 +108,7 @@ td #cardCount {
 }
 .homeBtn:hover {
     /* box-shadow: 0px 0px 15px 4px var(--secondaryColor); */
-    letter-spacing: 0.2rem;
+    letter-spacing: 0.15rem;
     border: none;
 }
 #playBtn:hover {
@@ -114,10 +116,10 @@ td #cardCount {
     color: var(--goodGreen);
     -webkit-text-stroke: 0.2rem var(--secondaryColor);
 }
-#play5x5 { color: var(--easyDifficulty) }
-#play5x5:hover { box-shadow: 0px 0px 12px 3px inset var(--easyDifficulty)}
-#play6x6 { color: var(--mediumDifficulty) }
-#play6x6:hover { box-shadow: 0px 0px 12px 3px inset var(--mediumDifficulty)};
+#playeasy { color: var(--easyDifficulty) }
+#playeasy:hover { box-shadow: 0px 0px 12px 3px inset var(--easyDifficulty)}
+#playmedi { color: var(--mediumDifficulty) }
+#playmedi:hover { box-shadow: 0px 0px 12px 3px inset var(--mediumDifficulty)};
 
 
 
@@ -131,44 +133,125 @@ td #cardCount {
     width: 1rem;
 }
 #boardRow {
-    height: 65vh;
-    width: 70vw;
+    height: 55vh;
+    max-width: 70vw;
+/* Make ^ 70vw on mobile */
+    left: 50%;
+    transform: translateX(-50%);
+    max-height: 55vh;
     display: flex;
-    background-color: blue;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: transparent;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    scrollbar-color: blue green;
+    scrollbar-width: thin;
     position: relative;
-    left: 0;
-    transform: translateX(25%);
+    padding: 2rem 6rem;
 }
 #board {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
     position: relative;
     padding: 2rem;
+    flex-wrap: wrap;
 }
 #board .card {
     border: 2px solid orange;
-    padding: 1rem;
+    padding: 2rem;
     width: 2%;
     display: flex;
     justify-content: center;
     margin: 1%;
     font-family: consolas;
     font-weight: bold;
+    transition: all 500ms ease;
+    position: relative;
+    color: white;
+}
+.card:hover {
+    cursor: pointer;
 }
 #controlPanel {
     height: 25vh;
     width: 100vw;
     display: flex;
     justify-content: center;
-    align-items: center;
+    font-family: cursive;
+}
+#clockPanel {
+    position: relative;
+    width: 100vw;
+    background-color: green;
+    bottom: 5vh;
+    display: flex;
+    height: 10vh;
+    justify-content: center;
+}
+#clock {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+#clockBody {
+    position: absolute;
+    top: 10%;
+    color: white;
 }
 #boardContainer tr {
     /* border: 1px solid green; */
 }
 table {
     height: 90vh;
+    display: flex;
+    justify-content: center;
     /* border: 1px solid red; */
 }
-.gameUI { border: 1px solid white; color: white; padding: 3rem }
+#boardContainer #boardRow .facedown {
+    background-color: var(--facedown);
+    color: var(--facedown);
+}
+#startBtn {
+    padding: 10px 20px;
+    background-color: var(--secondaryBrown);
+    color: var(--secondaryColor);
+    font-family: 'Franklin Gothic Medium';
+    font-size: 5rem;
+    box-shadow: 0px 0px 15px 3px inset var(--goodGreen);
+    padding: 0px 7rem;
+    transition: all 750ms ease;
+    /* transform: translateX(50%); */
+}
+#startBtn:hover {
+    background-color: black;
+}
+.gameUI { 
+    border: 1px solid white; 
+    color: white; 
+    width: 15vw;
+    height: 15vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+}
+#countPanel .reminder {
+    position: absolute;
+    bottom: 0;
+    font-size: 1rem;
+}
+#countPanel #flipCount {
+    color: var(--secondaryColor);
+}
+#boardContainer #boardRow #board .card.correct {
+    background-color: blue;
+}
+#boardContainer #boardRow #board .card.found {
+    position: absolute;
+    opacity: 0;
+}
+/* #boardContainer #boardRow #board .card.noclick {
+    pointer-events: none;
+} */
