@@ -242,6 +242,20 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
             number >= 8 ? clues = 2 : clues = 1;
             time = pickRandom([75,75,80,90,100]);
             break;
+        case 'medium':
+            number = pickRandom([9,10,11,12,13]);
+            count = number - pickRandom([2,3,4]);
+            attempts = pickRandom([18,20,22,25]);
+            number >= 11 ? clues = 2 : clues = 1;
+            time = pickRandom([50,60,75,80,90]);
+            break;
+        case 'hard':
+            number = pickRandom([12,13,14,15,16]);
+            count = number - pickRandom([5,6,7]);
+            count >= 7 ? count-- : count++;
+            attempts = pickRandom([22,24,25,26,28,30]);
+            number >= 16 ? clues = 2 : number >= 15 ? clues = 1 : clues = 0;
+            time = pickRandom([45,50,50,60,60,75]);
         default: 
             break;
     }

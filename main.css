@@ -100,6 +100,11 @@ td #cardCount {
     justify-content: center;
     border-width: 0.15rem;
     font-family: consolas;
+    color: var(--clue);
+    border-color: var(--clue);
+}
+.levelSelectBtn:hover {
+    box-shadow: 0px 0px 12px 3px inset var(--secondaryColor);
 }
 #levelSelectContainer {
     width: 75vw;
@@ -124,12 +129,13 @@ td #cardCount {
     color: var(--goodGreen);
     -webkit-text-stroke: 0.2rem var(--secondaryColor);
 }
-#playeasy { color: var(--easyDifficulty) }
-#playeasy:hover { box-shadow: 0px 0px 12px 3px inset var(--easyDifficulty)}
-#playmedium { color: var(--mediumDifficulty) }
+/* #playeasy { color: var(--easyDifficulty) };
+#playeasy:hover { box-shadow: 0px 0px 12px 3px inset var(--easyDifficulty)};
+#playmedium { color: var(--mediumDifficulty) };
 #playmedium:hover { box-shadow: 0px 0px 12px 3px inset var(--mediumDifficulty)};
-#playhard { color: red };
-#playhard:hover { box-shadow: 0px 0px 12px 3px var(--hardDifficulty) };
+#playhard { color: var(--hardDifficulty) };
+#playhard:hover { box-shadow: 0px 0px 12px 3px inset black };
+#playextreme { color: orange } */
 
 
 
@@ -153,8 +159,8 @@ td #cardCount {
     justify-content: center;
     flex-wrap: wrap;
     background-color: transparent;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    overflow-x:scroll;
+    overflow-y: auto;
     scrollbar-color: var(--secondaryColor) green;
     scrollbar-width: thin;
     position: relative;
@@ -193,7 +199,9 @@ td #cardCount {
 }
 #clockPanel {
     position: relative;
-    width: 98vw;
+    box-sizing: border-box;
+    width: 100vw;
+    right: 0;
     border: 0.25rem solid var(--goodGreen);
     background-color: var(--goodGreen);
     font-family: consolas;
@@ -314,7 +322,9 @@ table {
 .flicker { animation: borderFlicker infinite 40000ms; }
 /* #boardContainer #boardRow #board .card.noclick {
     pointer-events: none;
+    
 } */
+
 @keyframes spin {
   from {transform: translate(-50%, -50%) rotate(0);}
   to   {transform: translate(-50%, -50%) rotate(360deg);}
