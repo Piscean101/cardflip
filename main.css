@@ -273,9 +273,6 @@ table {
     position: absolute;
     opacity: 0;
 }
-#boardContainer #controlPanel #cluePanel {
-
-}
 .clueGlow {
     border: 2px solid var(--clue);
     box-shadow: 0px 0px 15px 3px white;
