@@ -49,7 +49,6 @@ document.addEventListener('DOMContentLoaded', () => {
             // var disableClick = document.querySelectorAll('facedown');
             // disableClick.forEach((e) => { e.target.classList.add('noclick')});
             e.target.classList.remove('facedown');
-            console.log('clicked card');
             flipCount.innerHTML = Number(flipCount.innerHTML) - 1;
             
             if (checkMatch(e.target)) {
@@ -62,12 +61,12 @@ document.addEventListener('DOMContentLoaded', () => {
             
             } else {
                 
-                setTimeout(() => { e.target.classList.add('facedown') },1250);
+                setTimeout(() => { e.target.classList.add('facedown') },1500);
             
             }
 
-            checkGameStatus('win');
-            checkGameStatus('flips');
+            checkGameStatus('win') ? null :
+            checkGameStatus('flips') ? null : null;
 
         }
 

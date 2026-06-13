@@ -150,8 +150,11 @@ export function statusMessage(type='win') {
 };
 export function checkGameStatus(type='clock') {
 
+    var status = false;
+
     if (type == 'win' && cardPanel.length == 0) { 
 
+        status = true;
         statusMessage('win');
         nextLevel();
 
@@ -168,7 +171,9 @@ export function checkGameStatus(type='clock') {
 
         statusMessage('flips');
 
-    }
+    };
+
+    return status;
 
 };
 export function startClock(time) {

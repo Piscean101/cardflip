@@ -11,6 +11,7 @@
     --mediumDifficulty: rgb(255, 191, 72);
     --text: grey;
     --facedown: rgb(142, 0, 0);
+    --fontFamily: var('Georgia');
 }
 body {
     display: flex;
@@ -78,9 +79,12 @@ td #cardCount {
     padding: 10px 20px;
     color: var(--secondaryColor);
     font-family: 'Franklin Gothic Medium';
-    font-size: 15rem;
+    font-size: 12rem;
     box-shadow: 0px 0px 15px 3px inset var(--goodGreen);
     padding: 0px 7rem;
+    max-width: 80vw;
+    display: flex;
+    justify-content: center;
     position: absolute;
 }
 .levelSelectBtn {
@@ -132,6 +136,7 @@ td #cardCount {
 .card {
     height: 1rem;
     width: 1rem;
+    font-family: var(--fontFamily);
 }
 #boardRow {
     height: 55vh;
@@ -139,7 +144,7 @@ td #cardCount {
 /* Make ^ 70vw on mobile */
     left: 50%;
     transform: translateX(-50%);
-    max-height: 55vh;
+    max-height: 45vh;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -180,13 +185,15 @@ td #cardCount {
     width: 100vw;
     display: flex;
     justify-content: center;
-    font-family: cursive;
+    font-family: var(--fontFamily);
 }
 #clockPanel {
     position: relative;
-    width: 100vw;
+    width: 101vw;
     background-color: green;
-    bottom: 5vh;
+    font-family: consolas;
+    font-weight: bold;
+    bottom: 6vh;
     display: flex;
     height: 10vh;
     justify-content: center;
@@ -210,6 +217,7 @@ table {
 #boardContainer #boardRow .facedown {
     background-color: var(--facedown);
     color: var(--facedown);
+    z-index: 100;
 }
 #startBtn {
     padding: 10px 20px;
@@ -234,6 +242,7 @@ table {
     align-items: center;
     justify-content: center;
     margin-top: 1rem;
+    letter-spacing: 2px;
 }
 #countPanel .reminder {
     position: absolute;
