@@ -39,6 +39,7 @@ button#backHome {
     color: var(--text);
     background-color: transparent;
     border: 1px solid var(--text);
+    padding: 10px 20px;
 }
 button:hover {
     cursor: pointer;
@@ -239,11 +240,22 @@ table {
 }
 #countPanel .reminder {
     position: absolute;
+    font-size: 0.75rem;
+}
+#countPanel .reminder#flipReminder {
     bottom: 0;
-    font-size: 1rem;
 }
 #countPanel #flipCount {
+    position: relative;
+    top: 0.75rem;
     color: var(--secondaryColor);
+}
+#countReminderContainer {
+    line-height: 0.9;
+    top: 5px;
+}
+#countNumer, #countDenom {
+    font-size: 150%;
 }
 #boardContainer #boardRow #board .card.correct {
     background-color: blue;

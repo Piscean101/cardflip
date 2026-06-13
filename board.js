@@ -4,82 +4,60 @@ export var cardPanel = new Array();
 export var cardPanelBody = document.getElementById('cardPanel');
 export var colors = ['Red','Blue','Green','White','Black'];
 export var deck = new Array();
+export var difficulty = window.location.href.split('/').pop().slice(4).slice(0,-5);
 export var options = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
 export var minuteBody = document.getElementById("minutes");
 export var secondBody = document.getElementById("seconds");
+export var countNumer = document.getElementById("countNumer");
+export var countDenom = document.getElementById("countDenom");
+export var flipCount = document.getElementById("flipCount");
 
 export function updateCardPanel() {
-    console.log(cardPanel);
-    cardPanelBody.innerHTML = cardPanel[0].innerHTML;
-}
+    cardPanelBody.innerHTML = cardPanel.shift().innerHTML;
+};
+export function pickRandom(options) {
+    return options[Math.floor(Math.random()*options.length)]
+};
 export function checkMatch(target) {
     return target.innerHTML == cardPanelBody.innerHTML;
-}
-export function startClock(time) {
-    const minutes = Math.floor(time/60);
-    const seconds = time - (minutes*60);
-    minuteBody.innerHTML = minutes;
-    secondBody.innerHTML = seconds;
-    function countdownClock() {
-        if (Number(secondBody.innerHTML) > 0) {
-            secondBody.innerHTML = Number(secondBody.innerHTML - 1)
-        } else {
-            minuteBody.innerHTML = Number(minuteBody.innerHTML - 1);
-            secondBody.innerHTML = 59;
-        }
-    }
+};
+export function createCard(number=pickRandom(options),color=pickRandom(colors)) {
+    
+    var newCard = document.createElement("div");
+    newCard.classList.add('card','facedown','hidden');
+    newCard.innerHTML = `${number}<br>${color}`;
+    
+    return newCard;
+    
+};
+export function checkDeckCopies(target) {
+    
+    let result = false;
+    
+    deck.forEach((e) => {
+    e.innerHTML == target.innerHTML ? result = true : null ;
+    });
 
-    setInterval(() => {
-        countdownClock();
-    },1000);
-}
-export function displayCards() {
-    var hiddenCards = document.querySelectorAll('.hidden');
-    startBtn.classList.add('hidden','active');
-    hiddenCards.forEach((e) => { e.classList.remove('hidden')});
-}
+    return result;
 
+};
+export function checkPanelCopies(target) {
 
+    let result = false;
 
-/**  */
-
-
-
-export function startGame(number=6,count=5,clues=1,time=90) {
-
-    if (number > 50) { return alert('Board size exceeding limit: 50') }
-
-    function pickRandom(options) {
-        return options[Math.floor(Math.random()*options.length)]
-    }
-
-    function createCard(number=pickRandom(options),color=pickRandom(colors)) {
-        
-        var newCard = document.createElement("div");
-        newCard.classList.add('card','facedown','hidden');
-        newCard.innerHTML = `${number}<br>${color}`;
-
-        return newCard;
-
-    }
-
-    function checkCopies(target) {
-
-        let result = false;
-
-        deck.forEach((e) => {
+    cardPanel.forEach((e) => {
         e.innerHTML == target.innerHTML ? result = true : null ;
-        });
+    });
 
-        return result;
+    return result;
 
-    }
+};
+export function addToDeck(card) {
 
-    function addToDeck(card) {
-
-        if (checkCopies(card) == false) {
+        if (checkDeckCopies(card) == false) {
 
             deck.push(card);
+
             return card;
 
         } else {
@@ -88,32 +66,143 @@ export function startGame(number=6,count=5,clues=1,time=90) {
 
         }
 
+};
+export function addToPanel(card) {
+
+    if (checkPanelCopies(card) == false) {
+
+        cardPanel.push(card);
+
+        return card;
+
+    } else {
+
+        return false;
+
     }
 
-    function deployCards() {
+};
+export function deployCards(number,count) {
+    
+    while (number > 0) {
         
-        while (number > 0) {
+        var cardBody = addToDeck(createCard());
+        
+        if (cardBody) {
 
-            var cardBody = addToDeck(createCard());
-
-            if (cardBody) {
-                board.appendChild(cardBody);
-                number--;
-            }
+            board.appendChild(cardBody);
+            number--;
 
         }
-
-        while (count > 0) {
-
-            cardPanel.push(pickRandom(deck));
-            count--;
-
-        }
-
         
     }
     
-    deployCards();
+    while (count > 0) {
+        
+        var cardBody = addToPanel(pickRandom(deck));
+
+        if (cardBody) { count-- }
+        
+    }
+    
+};
+export function displayCards() {
+
+    var hiddenCards = document.querySelectorAll('.hidden');
+    startBtn.classList.add('hidden','active');
+    hiddenCards.forEach((e) => { e.classList.remove('hidden')});
+
+};
+export function nextLevel() {
+
+    var wins = Number(localStorage.getItem("wins"));
+
+    if (wins) {
+
+        localStorage.setItem("wins",wins++);
+
+    } else {
+
+        localStorage.setItem("wins",1);
+
+    }
+
+    setTimeout(() => { location.reload(); },1500);
+
+};
+export function statusMessage(type='win',message='') {
+    switch(type) {
+        case 'win':
+            setTimeout(() => { alert('Level Complete! Nice Job!')},1000);
+            break;
+        case 'timeout':
+            alert('Time\'s Up! Game Over.');
+            break;
+        default:
+            break;
+    }
+};
+export function checkGameStatus(type='clock') {
+
+    if (type == 'win' && cardPanel.length == 0) { 
+
+        statusMessage('win');
+        nextLevel();
+
+    };
+
+    if (type == 'clock' && Number(minuteBody.innerHTML == 0) && Number(secondBody.innerHTML == 0)) {
+
+        statusMessage('timeout');
+        window.location = '../..';
+
+    };
+
+};
+export function startClock(time) {
+
+    const minutes = Math.floor(time/60);
+    const seconds = time - (minutes*60);
+    minuteBody.innerHTML = minutes;
+    secondBody.innerHTML = seconds;
+
+    function countdownClock() {
+
+        if (Number(secondBody.innerHTML) > 0) {
+
+            secondBody.innerHTML = Number(secondBody.innerHTML - 1)
+        
+        } else {
+
+            minuteBody.innerHTML = Number(minuteBody.innerHTML - 1);
+            
+            secondBody.innerHTML = 59;
+        }
+
+        checkGameStatus();
+
+    }
+
+    var countDown = setInterval(() => { countdownClock() },1000);
+
+};
+
+
+
+/**  */
+
+
+
+export function startGame(difficulty='easy',number=6,count=5,attempts=15,clues=1,time=100) {
+    
+    if (number > 50) { return alert('ERROR: Board size exceeding limit: 50') };
+
+    if (count > number) { return alert('ERROR: The Board size (1st arg) must be greater than the Panel size (2nd arg)')};
+
+    countDenom.innerHTML = count-1;
+    flipCount.innerHTML = attempts;
+    
+    deployCards(number,count);
     displayCards();
     updateCardPanel();
     // startClock(time);
