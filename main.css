@@ -201,9 +201,6 @@ td #cardCount {
     top: 10%;
     color: white;
 }
-#boardContainer tr {
-    /* border: 1px solid green; */
-}
 table {
     height: 90vh;
     display: flex;

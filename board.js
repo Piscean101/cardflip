@@ -119,7 +119,7 @@ export function nextLevel() {
 
     if (wins) {
 
-        localStorage.setItem("wins",wins++);
+        localStorage.setItem("wins",wins + 1);
 
     } else {
 
@@ -127,16 +127,22 @@ export function nextLevel() {
 
     }
 
+    console.log(localStorage.getItem("wins"));
+
     setTimeout(() => { location.reload(); },1500);
 
 };
-export function statusMessage(type='win',message='') {
+export function statusMessage(type='win') {
     switch(type) {
         case 'win':
             setTimeout(() => { alert('Level Complete! Nice Job!')},1000);
             break;
         case 'timeout':
             alert('Time\'s Up! Game Over.');
+            break;
+        case 'flips':
+            alert('You are out of actions! Game Over.');
+            setTimeout(() => { location.reload() }, 500);
             break;
         default:
             break;
@@ -157,6 +163,12 @@ export function checkGameStatus(type='clock') {
         window.location = '../..';
 
     };
+
+    if (type == 'flips' && Number(flipCount.innerHTML < 1)) {
+
+        statusMessage('flips');
+
+    }
 
 };
 export function startClock(time) {
@@ -193,7 +205,7 @@ export function startClock(time) {
 
 
 
-export function startGame(difficulty='easy',number=6,count=5,attempts=15,clues=1,time=100) {
+export function startGame(difficulty='easy',number=10,count=6,attempts=25,clues=1,time=90) {
     
     if (number > 50) { return alert('ERROR: Board size exceeding limit: 50') };
 
@@ -205,6 +217,6 @@ export function startGame(difficulty='easy',number=6,count=5,attempts=15,clues=1
     deployCards(number,count);
     displayCards();
     updateCardPanel();
-    // startClock(time);
+    startClock(time);
 
 };

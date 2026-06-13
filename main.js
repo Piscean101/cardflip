@@ -49,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // var disableClick = document.querySelectorAll('facedown');
             // disableClick.forEach((e) => { e.target.classList.add('noclick')});
             e.target.classList.remove('facedown');
+            console.log('clicked card');
             flipCount.innerHTML = Number(flipCount.innerHTML) - 1;
             
             if (checkMatch(e.target)) {
@@ -66,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             checkGameStatus('win');
+            checkGameStatus('flips');
 
         }
 
