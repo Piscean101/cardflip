@@ -2,8 +2,11 @@ export var board = document.getElementById("board");
 export var startBtn = document.getElementById("startBtn");
 export var cardPanel = new Array();
 export var cardPanelBody = document.getElementById('cardPanel');
+export var cluePanelBody = document.getElementById("cluePanel")
 export var colors = ['Red','Blue','Green','White','Black'];
 export var deck = new Array();
+export var clueCount = 0;
+export var clueCountBody = document.getElementById("clueCount");
 export var difficulty = window.location.href.split('/').pop().slice(4).slice(0,-5);
 export var options = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
 export var minuteBody = document.getElementById("minutes");
@@ -113,7 +116,18 @@ export function displayCards() {
     hiddenCards.forEach((e) => { e.classList.remove('hidden')});
 
 };
-export function nextLevel() {
+export function handleClues(init=false) {
+    var cards = document.querySelectorAll(".card");
+    cards.forEach((e) => {
+        if (e.innerHTML == cardPanelBody.innerHTML) {
+            e.classList.add('clueGlow')
+        }
+    });
+    clueCount--;
+    clueCountBody.innerHTML = Number(clueCountBody.innerHTML - 1);
+    if (!clueCount) { cluePanelBody.classList.add('hidden')};
+};
+export function nextLevel(next=true) {
 
     var wins = Number(localStorage.getItem("wins"));
 
@@ -129,19 +143,28 @@ export function nextLevel() {
 
     console.log(localStorage.getItem("wins"));
 
-    setTimeout(() => { location.reload(); },1500);
+    if (next) { 
+        location.reload();
+    } else {
+        window.location = "../..";
+    }
 
 };
 export function statusMessage(type='win') {
+    var decision = true;
     switch(type) {
         case 'win':
-            setTimeout(() => { alert('Level Complete! Nice Job!')},1000);
+            setTimeout(() => { 
+                decision = confirm('Level Complete!\n\nReady for the next one?');
+                decision ? nextLevel() : nextLevel(false);
+            },750);
             break;
         case 'timeout':
-            alert('Time\'s Up! Game Over.');
+            decision = confirm('Time\'s Up! Game Over.\n\nWant to try again?');
+            decision ? location.reload() : window.location = "../..";
             break;
         case 'flips':
-            alert('You are out of actions! Game Over.');
+            alert('You are out of actions! Better luck next time.');
             setTimeout(() => { location.reload() }, 500);
             break;
         default:
@@ -156,14 +179,12 @@ export function checkGameStatus(type='clock') {
 
         status = true;
         statusMessage('win');
-        nextLevel();
 
     };
 
     if (type == 'clock' && Number(minuteBody.innerHTML == 0) && Number(secondBody.innerHTML == 0)) {
 
         statusMessage('timeout');
-        window.location = '../..';
 
     };
 
@@ -210,12 +231,27 @@ export function startClock(time) {
 
 
 
-export function startGame(difficulty='easy',number=10,count=6,attempts=25,clues=1,time=90) {
+export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1,time=90) {
     
-    if (number > 50) { return alert('ERROR: Board size exceeding limit: 50') };
+    switch(level) {
+        case 'easy':
+            number = pickRandom([7,8,9]);
+            count = number - pickRandom([2,3]);
+            attempts = pickRandom([20,25]);
+            number >= 8 ? clues = 2 : clues = 1;
+            time = pickRandom([75,75,80,90,100]);
+            break;
+        default: 
+            break;
+    }
 
-    if (count > number) { return alert('ERROR: The Board size (1st arg) must be greater than the Panel size (2nd arg)')};
-
+    if (number > 50) { number = 50 };
+    if (count > number) { 
+        while (count >= number-1) { count-- }
+    };
+        
+    clueCount = clues;
+    clueCountBody.innerHTML = clues;
     countDenom.innerHTML = count-1;
     flipCount.innerHTML = attempts;
     
@@ -223,5 +259,6 @@ export function startGame(difficulty='easy',number=10,count=6,attempts=25,clues=
     displayCards();
     updateCardPanel();
     startClock(time);
+    if (!clues) { cluePanelBody.classList.add('hidden')};
 
 };

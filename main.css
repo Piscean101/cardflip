@@ -10,6 +10,7 @@
     --easyDifficulty: rgb(71, 71, 255);
     --mediumDifficulty: rgb(255, 191, 72);
     --text: grey;
+    --clue: rgb(0, 157, 255);
     --facedown: rgb(142, 0, 0);
     --fontFamily: var('Georgia');
 }
@@ -151,7 +152,7 @@ td #cardCount {
     background-color: transparent;
     overflow-y: scroll;
     overflow-x: hidden;
-    scrollbar-color: blue green;
+    scrollbar-color: var(--secondaryColor) green;
     scrollbar-width: thin;
     position: relative;
     padding: 2rem 6rem;
@@ -188,10 +189,12 @@ td #cardCount {
     font-family: var(--fontFamily);
 }
 #clockPanel {
-    position: relative;
-    width: 101vw;
+    position: absolute;
+    width: 100vw;
     background-color: green;
     font-family: consolas;
+    margin-right: none;
+    right: 0;
     font-weight: bold;
     bottom: 6vh;
     display: flex;
@@ -234,7 +237,7 @@ table {
     background-color: black;
 }
 .gameUI { 
-    border: 1px solid white; 
+    /* border: 1px solid white;  */
     color: white; 
     width: 15vw;
     height: 15vh;
@@ -244,7 +247,7 @@ table {
     margin-top: 1rem;
     letter-spacing: 2px;
 }
-#countPanel .reminder {
+#controlPanel .reminder {
     position: absolute;
     font-size: 0.75rem;
 }
@@ -270,6 +273,42 @@ table {
     position: absolute;
     opacity: 0;
 }
+#boardContainer #controlPanel #cluePanel {
+
+}
+.clueGlow {
+    border: 2px solid var(--clue);
+    box-shadow: 0px 0px 15px 3px white;
+}
+#cluePanel {
+    z-index: 100;
+    transform: scaleX(80%);
+    font-size: 175%;
+}
+#cluePanel:nth-child(0) {
+    color: red;
+    top: 2px;
+}
+#cluePanel .reminder {
+    bottom: 1rem;
+}
+#cluePanel:hover {
+    cursor: pointer;
+}
+#clueHeader {
+    top: 1rem;
+}
+#clueCount {
+    color: var(--secondaryColor);
+    font-weight: bold;
+    font-size: 150%;
+    position: absolute;
+    transform: translateY(-25%);
+}
 /* #boardContainer #boardRow #board .card.noclick {
     pointer-events: none;
 } */
+
+@media (min-width:500px) {
+    #boardRow { max-width: 40vw };
+}

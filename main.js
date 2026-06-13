@@ -1,4 +1,4 @@
-import { checkMatch, startGame, deck, cardPanel, updateCardPanel, checkGameStatus, flipCount, countNumer } from "./board.js";
+import { checkMatch, startGame, deck, cardPanel, updateCardPanel, checkGameStatus, flipCount, countNumer, handleClues } from "./board.js";
 document.addEventListener('DOMContentLoaded', () => {
     
     const playBtn = document.getElementById('playBtn');
@@ -30,12 +30,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (e.target.id == 'startBtn') { startGame() };
 
+        if (e.target.id == 'cluePanel') { handleClues() };
+
         if  (e.target.id == 'backHome') {
 
             localStorage.setItem('redir','true');
             window.location = "../";
 
         };
+
+        if (e.target.classList.contains('clueBodyText')) { handleClues() };
 
         if (e.target.classList.contains('levelSelectBtn')) {
             
