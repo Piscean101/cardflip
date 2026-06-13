@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../main.css"/>
     <script src="../main.js" type="module"></script>
-    <title>5x5</title>
+    <title>Difficulty: Easy</title>
 </head>
 <body id="boardPageBg">
 
@@ -18,20 +18,14 @@
                 <button id="startBtn">START!</button>
             </td>
         </tr>
-<!-- 
-        <tr id="board">
-            <td id="cluePanel" class="gameUI">CLUE PANEL</td>
-            <td id="cardPanel" class="gameUI">CARD PANEL<div id="cardCount">CARD COUNT</div></td>
-            <td id="countPanel" class="gameUI">COUNT PANEL</td>
-        </tr> -->
 
         <tr id="controlPanel">
-            <td id="cluePanel" class="clueGlow hidden gameUI" title="Click to reveal a card!">
+            <td id="cluePanel" class="hidden gameUI" title="Click to reveal a card!">
                 <span class="reminder clueBodyText" id="clueHeader">Amount:<span id="clueCount">0</span></span>
                 <span class="clueBodyText">CLUE</span><br>
-                <span class="reminder clueBodyText">Click to reveal a card!</span>
+                <span class="reminder clueBodyText">Reveal a card!</span>
             </td>
-            <td id="cardPanel" class="gameUI"></td>
+            <td id="cardPanel" class="clueGlow gameUI"></td>
             <td id="countPanel" class="gameUI">
                 <span id="countReminderContainer" class="reminder"><span id="countNumer">0</span>/<span id="countDenom">0</span><br>matches found</span>
                 <h1 id="flipCount">0</h1>
@@ -40,6 +34,7 @@
         </tr>
 
         <tr id="clockPanel">
+            <div id="clockPanelAfter"></div>
             <td id="clock" colspan="3">
                 <span id="clockBody"><span id="minutes">0</span>:<span id="seconds">0</span></span>
             </td>

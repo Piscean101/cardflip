@@ -5,9 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../main.css"/>
     <script src="../main.js" type="module"></script>
-    <title>6x6</title>
+    <title>Difficulty: Medium</title>
 </head>
 <body id="boardPageBg">
-    
+
+    <button id="backHome">&lt; Back</button>
+
+    <table id="boardContainer">
+
+        <tr id="boardRow">
+            <td id="board" colspan="3">
+                <button id="startBtn">START!</button>
+            </td>
+        </tr>
+
+        <tr id="controlPanel">
+            <td id="cluePanel" class="hidden gameUI" title="Click to reveal a card!">
+                <span class="reminder clueBodyText" id="clueHeader">Amount:<span id="clueCount">0</span></span>
+                <span class="clueBodyText">CLUE</span><br>
+                <span class="reminder clueBodyText">Reveal a card!</span>
+            </td>
+            <td id="cardPanel" class="clueGlow gameUI"></td>
+            <td id="countPanel" class="gameUI">
+                <span id="countReminderContainer" class="reminder"><span id="countNumer">0</span>/<span id="countDenom">0</span><br>matches found</span>
+                <h1 id="flipCount">0</h1>
+                <span id="flipReminder" class="reminder">flip(s) left</span>
+            </td>
+        </tr>
+
+        <tr id="clockPanel">
+            <div id="clockPanelAfter"></div>
+            <td id="clock" colspan="3">
+                <span id="clockBody"><span id="minutes">0</span>:<span id="seconds">0</span></span>
+            </td>
+        </tr>
+
+    </table>
+
 </body>
 </html>

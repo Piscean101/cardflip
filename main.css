@@ -6,13 +6,15 @@
     --goodGreen: rgb(0, 189, 0);
     --fadedGreen: rgba(0, 189, 0, 0.75);
     --fancyBgOne: linear-gradient(to bottom, var(--mainBrown), var(--secondaryBrown), var(--secondaryBrown), var(--secondaryBrown), var(--secondaryBrown), var(--secondaryBrown), var(--fadedGreen));
-    --secondaryColor: rgba(255, 221, 32, 0.7);
+    --secondaryColor: rgba(255, 221, 32);
     --easyDifficulty: rgb(71, 71, 255);
     --mediumDifficulty: rgb(255, 191, 72);
+    --hardDifficulty: rgb(0, 187, 255);
     --text: grey;
     --clue: rgb(0, 157, 255);
     --facedown: rgb(142, 0, 0);
-    --fontFamily: var('Georgia');
+    --fontFamily: 'Franklin Gothic Medium';
+    --clockPanelHeight: 10vh;
 }
 body {
     display: flex;
@@ -79,7 +81,7 @@ td #cardCount {
 #playBtn {
     padding: 10px 20px;
     color: var(--secondaryColor);
-    font-family: 'Franklin Gothic Medium';
+    font-family: var(--fontFamily);
     font-size: 12rem;
     box-shadow: 0px 0px 15px 3px inset var(--goodGreen);
     padding: 0px 7rem;
@@ -124,8 +126,10 @@ td #cardCount {
 }
 #playeasy { color: var(--easyDifficulty) }
 #playeasy:hover { box-shadow: 0px 0px 12px 3px inset var(--easyDifficulty)}
-#playmedi { color: var(--mediumDifficulty) }
-#playmedi:hover { box-shadow: 0px 0px 12px 3px inset var(--mediumDifficulty)};
+#playmedium { color: var(--mediumDifficulty) }
+#playmedium:hover { box-shadow: 0px 0px 12px 3px inset var(--mediumDifficulty)};
+#playhard { color: red };
+#playhard:hover { box-shadow: 0px 0px 12px 3px var(--hardDifficulty) };
 
 
 
@@ -137,7 +141,6 @@ td #cardCount {
 .card {
     height: 1rem;
     width: 1rem;
-    font-family: var(--fontFamily);
 }
 #boardRow {
     height: 55vh;
@@ -172,10 +175,10 @@ td #cardCount {
     display: flex;
     justify-content: center;
     margin: 1%;
-    font-family: consolas;
     font-weight: bold;
     transition: all 500ms ease;
     position: relative;
+    font-family: var(--fontFamily);
     color: white;
 }
 .card:hover {
@@ -189,17 +192,20 @@ td #cardCount {
     font-family: var(--fontFamily);
 }
 #clockPanel {
-    position: absolute;
-    width: 100vw;
-    background-color: green;
+    position: relative;
+    width: 98vw;
+    border: 0.25rem solid var(--goodGreen);
+    background-color: var(--goodGreen);
     font-family: consolas;
     margin-right: none;
-    right: 0;
     font-weight: bold;
-    bottom: 6vh;
     display: flex;
-    height: 10vh;
+    height: var(--clockPanelHeight);
     justify-content: center;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    overflow: hidden;
 }
 #clock {
     position: relative;
@@ -226,7 +232,7 @@ table {
     padding: 10px 20px;
     background-color: var(--secondaryBrown);
     color: var(--secondaryColor);
-    font-family: 'Franklin Gothic Medium';
+    font-family: var(--fontFamily);
     font-size: 5rem;
     box-shadow: 0px 0px 15px 3px inset var(--goodGreen);
     padding: 0px 7rem;
@@ -239,7 +245,7 @@ table {
 .gameUI { 
     /* border: 1px solid white;  */
     color: white; 
-    width: 15vw;
+    width: 22vw;
     height: 15vh;
     display: flex;
     align-items: center;
@@ -253,6 +259,9 @@ table {
 }
 #countPanel .reminder#flipReminder {
     bottom: 0;
+}
+#cardPanel {
+    width: 12vw;
 }
 #countPanel #flipCount {
     position: relative;
@@ -279,12 +288,12 @@ table {
 }
 #cluePanel {
     z-index: 100;
-    transform: scaleX(80%);
+    transform: scaleX(75%);
     font-size: 175%;
-}
-#cluePanel:nth-child(0) {
-    color: red;
-    top: 2px;
+    border-radius: 500px;
+    -webkit-text-stroke: 1px var(--clue);
+    /* border: 2px solid white; */
+    /* background-image: linear-gradient(190deg, var(--clue), transparent, var(--clue), transparent); */
 }
 #cluePanel .reminder {
     bottom: 1rem;
@@ -302,10 +311,39 @@ table {
     position: absolute;
     transform: translateY(-25%);
 }
+.flicker { animation: borderFlicker infinite 40000ms; }
 /* #boardContainer #boardRow #board .card.noclick {
     pointer-events: none;
 } */
+@keyframes spin {
+  from {transform: translate(-50%, -50%) rotate(0);}
+  to   {transform: translate(-50%, -50%) rotate(360deg);}
+}
 
-@media (min-width:500px) {
-    #boardRow { max-width: 40vw };
+@keyframes borderFlicker {
+    0% {
+        border-color: var(--goodGreen);
+    }
+    5% {
+        border-color: var(--secondaryColor);
+    }
+    25% {
+        border-color: var(--clue);
+    }
+    45% {
+        border-color: red;
+    }
+    65% {
+        border-color: var(--facedown);
+    }
+    80% {
+        border-color: white;
+    }
+    95% {
+        border-color: var(--goodGreen);
+    }
+}
+
+@media (min-width:300px) {
+    #boardRow { max-width: 40vw; height: 35vh };
 }

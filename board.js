@@ -2,7 +2,7 @@ export var board = document.getElementById("board");
 export var startBtn = document.getElementById("startBtn");
 export var cardPanel = new Array();
 export var cardPanelBody = document.getElementById('cardPanel');
-export var cluePanelBody = document.getElementById("cluePanel")
+export var cluePanelBody = document.getElementById("cluePanel");
 export var colors = ['Red','Blue','Green','White','Black'];
 export var deck = new Array();
 export var clueCount = 0;
@@ -11,6 +11,7 @@ export var difficulty = window.location.href.split('/').pop().slice(4).slice(0,-
 export var options = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
 export var minuteBody = document.getElementById("minutes");
 export var secondBody = document.getElementById("seconds");
+export var clockPanelBody = document.getElementById("clockPanel");
 export var countNumer = document.getElementById("countNumer");
 export var countDenom = document.getElementById("countDenom");
 export var flipCount = document.getElementById("flipCount");
@@ -254,6 +255,7 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
     clueCountBody.innerHTML = clues;
     countDenom.innerHTML = count-1;
     flipCount.innerHTML = attempts;
+    clockPanelBody.classList.add('flicker');
     
     deployCards(number,count);
     displayCards();
