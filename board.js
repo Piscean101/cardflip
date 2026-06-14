@@ -218,6 +218,13 @@ export function startClock(time) {
             secondBody.innerHTML = 59;
         }
 
+        if (Number(minuteBody.innerHTML <= 0)) {
+
+            Number(secondBody.innerHTML <= 10) ? clockPanelBody.classList.add('timeUp') :
+            Number(secondBody.innerHTML <= 30) ? clockPanelBody.classList.add('warningTime') : null;
+
+        } 
+
         checkGameStatus();
 
     }

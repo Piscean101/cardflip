@@ -10,6 +10,7 @@
     --easyDifficulty: rgb(71, 71, 255);
     --mediumDifficulty: rgb(255, 191, 72);
     --hardDifficulty: rgb(255, 77, 0);
+    --extremeDifficulty: rgb(169, 0, 121);
     --text: grey;
     --clue: rgb(0, 157, 255);
     --facedown: rgb(142, 0, 0);
@@ -69,14 +70,30 @@ td #cardCount {
     font-family: Impact;
     padding: 10px 20px;
     border: 1px solid var(--text);   
+    color: white;
+    letter-spacing: 1.2px;
 }
 #navBar button:disabled {
     background-color: var(--text);
     color: rgba(0, 0, 0, 0.08);
     cursor:none;
 }
-
-
+#navBar button.diffEasy {
+    background-color: var(--easyDifficulty);
+    color: white;
+}
+#navBar button.diffMedium {
+    background-color: var(--mediumDifficulty);
+    color: white;
+}
+#navBar button.diffHard {
+    background-color: var(--hardDifficulty);
+    color: white;
+}
+#navBar button.diffExhi {
+    background-color: var(--extremeDifficulty);
+    color: white;
+}
 
 /** WELCOME PAGE **/
 
@@ -128,11 +145,11 @@ td #cardCount {
     flex-wrap: wrap;
     bottom: 0;
 }   
-.levelSelectDisplay {
+.levelSelectHeader {
     position: absolute;
-    top: 15%;
+    top: 10%;
     font-family: Impact;
-    font-size: 150%;
+    font-size: 200%;
 }
 .homeBtn:hover {
     /* box-shadow: 0px 0px 15px 4px var(--secondaryColor); */
@@ -164,7 +181,7 @@ td #cardCount {
     width: 1rem;
 }
 #boardRow {
-    min-height: 45vh;
+    min-height: 55vh;
     min-width: 80vw;
 /* Make ^ 70vw on mobile */
     left: 50%;
@@ -213,7 +230,7 @@ td #cardCount {
 }
 #clockPanel {
     position: absolute;
-    bottom: -18px;
+    bottom: -25px;
     box-sizing: border-box;
     width: 150vw;
     right: 50%;
@@ -224,6 +241,7 @@ td #cardCount {
     font-family: consolas;
     margin-right: none;
     font-weight: bold;
+    font-size: 150%;
     display: flex;
     height: var(--clockPanelHeight);
     justify-content: center;
@@ -231,6 +249,7 @@ td #cardCount {
     transform: translateX(-50%);
     z-index: 2;
     overflow: hidden;
+    transition: all 1500ms ease;
 }
 #clock {
     position: relative;
@@ -241,6 +260,18 @@ td #cardCount {
     position: absolute;
     top: 10%;
     color: white;
+}
+#clockPanel.warningTime {
+    background-color: var(--secondaryColor);
+}
+#clockPanel.timeUp {
+    background-color: var(--facedown);
+}
+#clockPanel.warningTime #clockBody {
+    color: var(--facedown);
+}
+#clockPanel.timeUp #clockBody {
+    color: black;
 }
 table {
     height: 90vh;

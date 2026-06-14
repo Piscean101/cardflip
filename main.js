@@ -2,7 +2,7 @@ import { checkMatch, startGame, deck, cardPanel, updateCardPanel, checkGameStatu
 document.addEventListener('DOMContentLoaded', () => {
     
     const playBtn = document.getElementById('playBtn');
-    const levelSelectDisplay = document.querySelector('.levelSelectDisplay');
+    const levelSelectDisplay = document.querySelector('.levelSelectHeader');
 
     function pressPlay() {
 
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             btn.classList.remove('hidden');
             btn.classList.add('active');
-            
+
         });
 
     };
