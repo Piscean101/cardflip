@@ -9,7 +9,7 @@
     --secondaryColor: rgba(255, 221, 32);
     --easyDifficulty: rgb(71, 71, 255);
     --mediumDifficulty: rgb(255, 191, 72);
-    --hardDifficulty: rgb(0, 187, 255);
+    --hardDifficulty: rgb(255, 77, 0);
     --text: grey;
     --clue: rgb(0, 157, 255);
     --facedown: rgb(142, 0, 0);
@@ -90,6 +90,10 @@ td #cardCount {
     justify-content: center;
     position: absolute;
 }
+.levelSelectBtn#playexhibition {
+    color: var(--hardDifficulty);
+    border-color: var(--hardDifficulty);
+}
 .levelSelectBtn {
     font-size: 1.5rem;
     font-weight: bold;
@@ -150,29 +154,28 @@ td #cardCount {
     width: 1rem;
 }
 #boardRow {
-    height: 55vh;
-    max-width: 70vw;
+    min-height: 45vh;
+    min-width: 80vw;
 /* Make ^ 70vw on mobile */
     left: 50%;
     transform: translateX(-50%);
     max-height: 45vh;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
     background-color: transparent;
     overflow-x:scroll;
     overflow-y: auto;
     scrollbar-color: var(--secondaryColor) green;
     scrollbar-width: thin;
     position: relative;
-    padding: 2rem 6rem;
 }
 #board {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-    padding: 2rem;
+    padding: none;
     flex-wrap: wrap;
 }
 #board .card {
@@ -275,6 +278,7 @@ table {
 }
 #cardPanel {
     width: 12vw;
+    padding: 1rem 2rem;
 }
 #countPanel #flipCount {
     position: relative;
@@ -304,6 +308,7 @@ table {
     transform: scaleX(75%);
     font-size: 175%;
     border-radius: 500px;
+    letter-spacing: 5px;
     -webkit-text-stroke: 1px var(--clue);
     /* border: 2px solid white; */
     /* background-image: linear-gradient(190deg, var(--clue), transparent, var(--clue), transparent); */

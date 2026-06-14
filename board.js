@@ -147,7 +147,7 @@ export function nextLevel(next=true) {
     if (next) { 
         location.reload();
     } else {
-        window.location = "../../";
+        window.location = "../";
     }
 
 };
@@ -162,7 +162,7 @@ export function statusMessage(type='win') {
             break;
         case 'timeout':
             decision = confirm('Time\'s Up! Game Over.\n\nWant to try again?');
-            decision ? location.reload() : window.location = "../../";
+            decision ? location.reload() : window.location = "../";
             break;
         case 'flips':
             alert('You are out of actions! Better luck next time.');
@@ -256,6 +256,15 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
             attempts = pickRandom([22,24,25,26,28,30]);
             number >= 16 ? clues = 2 : number >= 15 ? clues = 1 : clues = 0;
             time = pickRandom([45,50,50,60,60,75]);
+            break;
+        case 'exhibition':
+            number = pickRandom([25,30,35,40]);
+            count = number - pickRandom([7,8,9,10]);
+            clues = Math.floor(count/2-pickRandom([1,2,3,4,5]));
+            count >= 30 ? count-=10 : count >= 20 ? count-= 5 : null;
+            attempts = pickRandom([30,35,40,45,50]);
+            time = pickRandom([90,90,90,100,120,150]);
+            break;
         default: 
             break;
     }
@@ -264,7 +273,8 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
     if (count > number) { 
         while (count >= number-1) { count-- }
     };
-        
+    
+    count >= 8 ? attempts += 5 : count >= 6 ? attempts += 2 : null;
     clueCount = clues;
     clueCountBody.innerHTML = clues;
     countDenom.innerHTML = count-1;
