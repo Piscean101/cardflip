@@ -13,7 +13,7 @@
     --text: grey;
     --clue: rgb(0, 157, 255);
     --facedown: rgb(142, 0, 0);
-    --fontFamily: 'Segoe UI','Franklin Gothic Medium';
+    --fontFamily: system-ui,'Segoe UI',fantasy;;
     --clockPanelHeight: 10vh;
 }
 body {
@@ -34,16 +34,6 @@ a {
 button {
     position: relative;
     box-sizing: border-box;
-}
-button#backHome {
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-family: Impact;
-    color: var(--text);
-    background-color: transparent;
-    border: 1px solid var(--text);
-    padding: 10px 20px;
 }
 button:hover {
     cursor: pointer;
@@ -66,6 +56,26 @@ td #cardCount {
     top: 110%;
 }
 
+/** NAVIGATION **/
+
+#navBar {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#navBar button {
+    color: var(--text);
+    background-color: transparent;
+    font-family: Impact;
+    padding: 10px 20px;
+    border: 1px solid var(--text);   
+}
+#navBar button:disabled {
+    background-color: var(--text);
+    color: rgba(0, 0, 0, 0.08);
+    cursor:none;
+}
+
 
 
 /** WELCOME PAGE **/
@@ -77,11 +87,11 @@ td #cardCount {
     border: 0.25rem solid var(--secondaryColor);
     border-radius: 150px;
     background-color: var(--secondaryBrown);
+    font-family: var(--fontFamily);
 }
 #playBtn {
     padding: 10px 20px;
     color: var(--secondaryColor);
-    font-family: var(--fontFamily);
     font-size: 12rem;
     box-shadow: 0px 0px 15px 3px inset var(--goodGreen);
     padding: 0px 7rem;
@@ -103,7 +113,6 @@ td #cardCount {
     display: flex;
     justify-content: center;
     border-width: 0.15rem;
-    font-family: consolas,system-ui,'Segoe UI',fantasy;
     color: var(--clue);
     border-color: var(--clue);
 }
@@ -123,6 +132,7 @@ td #cardCount {
     position: absolute;
     top: 15%;
     font-family: Impact;
+    font-size: 150%;
 }
 .homeBtn:hover {
     /* box-shadow: 0px 0px 15px 4px var(--secondaryColor); */
@@ -202,11 +212,14 @@ td #cardCount {
     font-family: var(--fontFamily);
 }
 #clockPanel {
-    position: relative;
+    position: absolute;
+    bottom: -18px;
     box-sizing: border-box;
-    width: 100vw;
-    right: 0;
-    border: 0.25rem solid var(--goodGreen);
+    width: 150vw;
+    right: 50%;
+    transform: translateX(-50%);
+    border-top: 0.25rem solid var(--goodGreen);
+    border-bottom: 0.25rem solid var(--goodGreen);
     background-color: var(--goodGreen);
     font-family: consolas;
     margin-right: none;
@@ -241,7 +254,7 @@ table {
     z-index: 100;
 }
 #startBtn {
-    padding: 10px 20px;
+    padding: 1rem 2rem;
     background-color: var(--secondaryBrown);
     color: var(--secondaryColor);
     font-family: var(--fontFamily);
@@ -253,6 +266,7 @@ table {
     max-width: 55vw;
     display: flex;
     justify-content: center;
+    border-radius: 150px;
     /* transform: translateX(50%); */
 }
 #startBtn:hover {
@@ -273,12 +287,15 @@ table {
     position: absolute;
     font-size: 0.75rem;
 }
-#countPanel .reminder#flipReminder {
-    bottom: 0;
-}
 #cardPanel {
     width: 12vw;
     padding: 1rem 2rem;
+}
+#countPanel, #cluePanel {
+    padding: 0.5rem;
+}
+#countPanel .reminder#flipReminder {
+    bottom: 0;
 }
 #countPanel #flipCount {
     position: relative;
@@ -301,13 +318,14 @@ table {
 }
 .clueGlow {
     border: 2px solid var(--clue);
-    box-shadow: 0px 0px 15px 3px white;
+    box-shadow: 0px 0px 12px 0px white;
 }
 #cluePanel {
     z-index: 100;
     transform: scaleX(75%);
     font-size: 175%;
     border-radius: 500px;
+    font-weight: bold;
     letter-spacing: 5px;
     -webkit-text-stroke: 1px var(--clue);
     /* border: 2px solid white; */
@@ -329,7 +347,7 @@ table {
     position: absolute;
     transform: translateY(-25%);
 }
-.flicker { animation: borderFlicker infinite 40000ms; }
+.flicker { animation: borderFlicker infinite 45000ms; }
 /* #boardContainer #boardRow #board .card.noclick {
     pointer-events: none;
     
@@ -357,10 +375,10 @@ table {
         border-color: var(--facedown);
     }
     80% {
-        border-color: white;
+        border-color: pink;
     }
     95% {
-        border-color: var(--goodGreen);
+        border-color: white;
     }
 }
 
@@ -369,7 +387,7 @@ table {
 }
 @media only screen and (max-width: 650px) {
     #playBtn { font-size: 8rem };
-    #startBtn { max-width: 90vw; font-size: 3px }
+    #startBtn { max-width: 90vw; }
 }
 @media only screen and (max-width: 450px) {
     #playBtn { font-size: 5rem };

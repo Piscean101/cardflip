@@ -239,31 +239,31 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
             number = pickRandom([7,8,9]);
             count = number - pickRandom([2,3]);
             attempts = pickRandom([20,25]);
-            number >= 8 ? clues = 2 : clues = 1;
+            number >= 9 ? clues = 2 : clues = 1;
             time = pickRandom([75,75,80,90,100]);
             break;
         case 'medium':
             number = pickRandom([9,10,11,12,13]);
             count = number - pickRandom([2,3,4]);
             attempts = pickRandom([18,20,22,25]);
-            number >= 11 ? clues = 2 : clues = 1;
+            number >= 12 ? clues = 2 : clues = 1;
             time = pickRandom([50,60,75,80,90]);
             break;
         case 'hard':
-            number = pickRandom([12,13,14,15,16]);
+            number = pickRandom([14,15,16,17,18]);
             count = number - pickRandom([5,6,7]);
             count >= 7 ? count-- : count++;
             attempts = pickRandom([22,24,25,26,28,30]);
-            number >= 16 ? clues = 2 : number >= 15 ? clues = 1 : clues = 0;
+            number >= 16 ? clues = 2 : number >= 14 ? clues = 1 : clues = 0;
             time = pickRandom([45,50,50,60,60,75]);
             break;
         case 'exhibition':
-            number = pickRandom([25,30,35,40]);
+            number = pickRandom([35,36,37,38,39,40,41,42]);
             count = number - pickRandom([7,8,9,10]);
-            clues = Math.floor(count/2-pickRandom([1,2,3,4,5]));
+            clues = Math.floor((count/2)-pickRandom([5,6,7]));
             count >= 30 ? count-=10 : count >= 20 ? count-= 5 : null;
-            attempts = pickRandom([30,35,40,45,50]);
-            time = pickRandom([90,90,90,100,120,150]);
+            attempts = pickRandom([40,45,50,55]);
+            time = pickRandom([120,150,150,150,150,180]);
             break;
         default: 
             break;

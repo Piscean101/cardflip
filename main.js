@@ -11,8 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
         playBtn.classList.add('hidden','active');
 
         document.querySelectorAll('.levelSelectBtn').forEach((btn) => {
+
             btn.classList.remove('hidden');
             btn.classList.add('active');
+            
         });
 
     };
@@ -50,8 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (e.target.classList.contains('facedown')) {
             
-            // var disableClick = document.querySelectorAll('facedown');
-            // disableClick.forEach((e) => { e.target.classList.add('noclick')});
             e.target.classList.remove('facedown');
             flipCount.innerHTML = Number(flipCount.innerHTML) - 1;
             
