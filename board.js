@@ -147,7 +147,7 @@ export function nextLevel(next=true) {
     if (next) { 
         location.reload();
     } else {
-        window.location = "../..";
+        window.location = "../../";
     }
 
 };
@@ -162,7 +162,7 @@ export function statusMessage(type='win') {
             break;
         case 'timeout':
             decision = confirm('Time\'s Up! Game Over.\n\nWant to try again?');
-            decision ? location.reload() : window.location = "../..";
+            decision ? location.reload() : window.location = "../../";
             break;
         case 'flips':
             alert('You are out of actions! Better luck next time.');

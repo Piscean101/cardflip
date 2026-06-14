@@ -78,3 +78,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 // startGame();
+console.log(window.location)
