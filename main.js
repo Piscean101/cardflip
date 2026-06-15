@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (e.target.id == 'cluePanel') { handleClues() };
 
-        if (e.target.id == 'statsBtn') { window.location = "./user/profile.html"};
+        // if (e.target.id == 'statsBtn') { window.location = "./user/profile.html"};
 
         if  (e.target.id == 'backHome') {
 
