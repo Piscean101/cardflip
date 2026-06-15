@@ -16,6 +16,15 @@ export function handleStats() {
 
     var perTest = `${(Number(winStats.innerHTML) / Number(totalGames.innerHTML) * 100).toFixed(1)}%`;
 
-    typeof(perTest) == 'Number' ? percentWin.innerHTML = perTest : percentWin.innerHTML = '-';
+    typeof(perTest) == 'string' ? percentWin.innerHTML = perTest : percentWin.innerHTML = '-';
+
+    var N = Number(percentWin.innerHTML.replace("%",""));
+
+    N >= 90 ? percentWin.style.color = '#009DFF' :
+    N >= 80 ? percentWin.style.color = '#00e84d' :
+    N >= 70 ? percentWin.style.color = 'green' :
+    N >= 50 ? percentWin.style.color = '#008080' :
+    N >= 40 ? percentWin.style.color = '#BE800B' :
+    N >= 30 ? percentWin.style.color = '#AE2029' : null;
 
 }

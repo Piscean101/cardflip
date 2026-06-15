@@ -133,8 +133,10 @@ export function nextLevel(next=true) {
 
     var wins = Number(localStorage.getItem("wins"));
     // var losses = Number(localStorage.getItem("loss"));
-    var currentStreak = Number(localStorage.get("streak"));
+    var currentStreak = Number(localStorage.getItem("streak"));
     var longestStreak = Number(localStorage.getItem("record"));
+
+    longestStreak ? null : localStorage.setItem("record",1);
 
     if (wins) {
 
@@ -156,7 +158,7 @@ export function nextLevel(next=true) {
 
     }
 
-    if (currentStreak > longestStreak || !longestStreak) {
+    if (currentStreak > longestStreak) {
 
         localStorage.setItem("record",currentStreak);
 
@@ -182,11 +184,13 @@ export function statusMessage(type='win') {
             break;
         case 'timeout':
             localStorage.setItem("streak",0);
+            localStorage.getItem("loss") ? localStorage.setItem("loss",Number(localStorage.getItem("loss")) + 1) : localStorage.setItem("loss",1);
             decision = confirm('Time\'s Up! Game Over.\n\nWant to try again?');
             decision ? location.reload() : window.location = "../";
             break;
         case 'flips':
             localStorage.setItem("streak",0);
+            localStorage.getItem("loss") ? localStorage.setItem("loss",Number(localStorage.getItem("loss")) + 1) : localStorage.setItem("loss",1);
             alert('You are out of actions! Better luck next time.');
             setTimeout(() => { location.reload() }, 500);
             break;
@@ -308,6 +312,7 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
     countDenom.innerHTML = count-1;
     flipCount.innerHTML = attempts;
     clockPanelBody.classList.add('flicker');
+    cardPanelBody.classList.remove('hidden');
     
     deployCards(number,count);
     displayCards();

@@ -344,6 +344,7 @@ table {
 #cardPanel {
     width: 12vw;
     padding: 1rem 2rem;
+    transition: all 400ms ease;
 }
 #countPanel, #cluePanel {
     padding: 0.5rem;
@@ -435,6 +436,7 @@ table {
     left: 1vw;
     color: var(--text);
     text-align: left;
+    font-size: 150%;
 }
 #statsTable tr:nth-of-type(even) {
     background-color: white;
@@ -443,6 +445,7 @@ body #statsTable td.statsCategory {
     background-color: var(--profileBgColor);
     font-weight: bold;
     padding-right: 2rem;
+    font-size: 80%;
     width: 20vw;
 }
 #statsTable td.statsResult { 
@@ -453,6 +456,7 @@ body #statsTable td.statsCategory {
     width: 40vw;
     text-align: right;
     padding: 0 0.75rem;
+    font-size: 120%;
     /* display: flex; */
     /* justify-content: end; */
  }
