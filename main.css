@@ -463,7 +463,7 @@ body #statsTable td.statsCategory {
 #welcomeProfile {
     position: absolute;
     font-family: var(--fontFamily);
-    top: 5vh;
+    top: 10vh;
 }
 
 
@@ -501,6 +501,11 @@ body #statsTable td.statsCategory {
     #boardRow { max-width: 40vw; height: 35vh };
 }
 @media only screen and (max-width: 650px) {
+    #statsTable {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80vw;
+    }
     #playBtn { font-size: 8rem };
     #statsBtn { font-size: 4rem };
     #startBtn { max-width: 90vw; };
