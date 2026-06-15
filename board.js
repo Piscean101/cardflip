@@ -15,6 +15,7 @@ export var clockPanelBody = document.getElementById("clockPanel");
 export var countNumer = document.getElementById("countNumer");
 export var countDenom = document.getElementById("countDenom");
 export var flipCount = document.getElementById("flipCount");
+export var winStatus = false;
 
 export function updateCardPanel() {
     cardPanelBody.innerHTML = cardPanel.shift().innerHTML;
@@ -131,6 +132,9 @@ export function handleClues(init=false) {
 export function nextLevel(next=true) {
 
     var wins = Number(localStorage.getItem("wins"));
+    // var losses = Number(localStorage.getItem("loss"));
+    var currentStreak = Number(localStorage.get("streak"));
+    var longestStreak = Number(localStorage.getItem("record"));
 
     if (wins) {
 
@@ -142,7 +146,23 @@ export function nextLevel(next=true) {
 
     }
 
-    console.log(localStorage.getItem("wins"));
+    if (currentStreak) {
+
+        localStorage.setItem("streak", currentStreak + 1);
+
+    } else {
+
+        localStorage.setItem("streak", 1);
+
+    }
+
+    if (currentStreak > longestStreak || !longestStreak) {
+
+        localStorage.setItem("record",currentStreak);
+
+    } 
+
+    winStatus = false;
 
     if (next) { 
         location.reload();
@@ -161,10 +181,12 @@ export function statusMessage(type='win') {
             },750);
             break;
         case 'timeout':
+            localStorage.setItem("streak",0);
             decision = confirm('Time\'s Up! Game Over.\n\nWant to try again?');
             decision ? location.reload() : window.location = "../";
             break;
         case 'flips':
+            localStorage.setItem("streak",0);
             alert('You are out of actions! Better luck next time.');
             setTimeout(() => { location.reload() }, 500);
             break;
@@ -174,16 +196,14 @@ export function statusMessage(type='win') {
 };
 export function checkGameStatus(type='clock') {
 
-    var status = false;
-
     if (type == 'win' && cardPanel.length == 0) { 
 
-        status = true;
+        winStatus = true;
         statusMessage('win');
 
     };
 
-    if (type == 'clock' && Number(minuteBody.innerHTML == 0) && Number(secondBody.innerHTML == 0)) {
+    if (type == 'clock' && Number(minuteBody.innerHTML == 0) && Number(secondBody.innerHTML == 0) && !winStatus) {
 
         statusMessage('timeout');
 
@@ -195,7 +215,7 @@ export function checkGameStatus(type='clock') {
 
     };
 
-    return status;
+    return winStatus;
 
 };
 export function startClock(time) {

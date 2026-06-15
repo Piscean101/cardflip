@@ -12,6 +12,7 @@
     --hardDifficulty: rgb(255, 77, 0);
     --extremeDifficulty: rgb(169, 0, 121);
     --text: grey;
+    --profileBgColor: #d3d3d3;
     --clue: rgb(0, 157, 255);
     --facedown: rgb(142, 0, 0);
     --fontFamily: system-ui,'Segoe UI',fantasy;;
@@ -47,6 +48,8 @@ body#boardPageBg {
 }
 body#welcomePageBg {
     background-color: var(--welcomePageBgColor);
+    display: flex;
+    justify-content: center;
 }
 td { 
     text-align: center; 
@@ -57,7 +60,11 @@ td #cardCount {
     top: 110%;
 }
 
+
+
 /** NAVIGATION **/
+
+
 
 #navBar {
     position: absolute;
@@ -95,6 +102,8 @@ td #cardCount {
     color: white;
 }
 
+
+
 /** WELCOME PAGE **/
 
 
@@ -106,6 +115,14 @@ td #cardCount {
     background-color: var(--secondaryBrown);
     font-family: var(--fontFamily);
 }
+#homeBtnContainer {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 1rem;
+    transition: all 400ms ease;
+}
 #playBtn {
     padding: 10px 20px;
     color: var(--secondaryColor);
@@ -115,7 +132,18 @@ td #cardCount {
     max-width: 80vw;
     display: flex;
     justify-content: center;
-    position: absolute;
+    margin-bottom: 2rem;
+}
+#statsBtn {
+    padding: 10px 20px;
+    color: var(--clue);
+    font-size: 2rem;
+    box-shadow: 0px 0px 15px 3px inset var(--goodGreen);
+    padding: 0px 4rem;
+    max-width: 60vw;
+    border-color: var(--clue);
+    display: flex;
+    justify-content: center;
 }
 .levelSelectBtn#playexhibition {
     color: var(--hardDifficulty);
@@ -161,14 +189,6 @@ td #cardCount {
     color: var(--goodGreen);
     -webkit-text-stroke: 0.2rem var(--secondaryColor);
 }
-/* #playeasy { color: var(--easyDifficulty) };
-#playeasy:hover { box-shadow: 0px 0px 12px 3px inset var(--easyDifficulty)};
-#playmedium { color: var(--mediumDifficulty) };
-#playmedium:hover { box-shadow: 0px 0px 12px 3px inset var(--mediumDifficulty)};
-#playhard { color: var(--hardDifficulty) };
-#playhard:hover { box-shadow: 0px 0px 12px 3px inset black };
-#playextreme { color: orange } */
-
 
 
 
@@ -384,6 +404,63 @@ table {
     
 } */
 
+
+
+/** PROFILE PAGES **/
+
+
+
+
+#profileBody { 
+    background-color: var(--profileBgColor);
+}
+#changeName:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+#statsTable {
+    width: 40vw;
+    height: 30vh;
+    font-family: var(--fontFamily);
+    left: 0;
+    font-weight: bold;
+    position: absolute;
+}
+#statsTable th {
+    position: relative;
+    bottom: 2vh;
+    left: 1vw;
+    color: var(--text);
+    text-align: left;
+}
+#statsTable tr:nth-of-type(even) {
+    background-color: white;
+}
+body #statsTable td.statsCategory { 
+    background-color: var(--profileBgColor);
+    font-weight: bold;
+    padding-right: 2rem;
+    width: 20vw;
+}
+#statsTable td.statsResult { 
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    overflow: hidden;
+    box-shadow: 0px 0px 12px 0px var(--grey);
+    width: 40vw;
+    text-align: right;
+    padding: 0 0.75rem;
+    /* display: flex; */
+    /* justify-content: end; */
+ }
+#welcomeProfile {
+    position: absolute;
+    font-family: var(--fontFamily);
+    top: 5vh;
+}
+
+
+
 @keyframes spin {
   from {transform: translate(-50%, -50%) rotate(0);}
   to   {transform: translate(-50%, -50%) rotate(360deg);}
@@ -418,8 +495,10 @@ table {
 }
 @media only screen and (max-width: 650px) {
     #playBtn { font-size: 8rem };
-    #startBtn { max-width: 90vw; }
+    #statsBtn { font-size: 4rem };
+    #startBtn { max-width: 90vw; };
 }
 @media only screen and (max-width: 450px) {
     #playBtn { font-size: 5rem };
+    #statsBtn { font-size: 2rem };
 }

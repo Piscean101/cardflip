@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../main.css"/>
+    <script src="../main.js" type="module"></script>
+    <script src="../user.js" type="module"></script>
+    <title>Profile</title>
+</head>
+<body id="profileBody">
+    <div id="navBar">
+    <button id="backHome">&lt; Back</button>
+    </div>
+    <h1 id="welcomeProfile">Welcome, <span id="changeName" title="Change Name">[ select username ]</span></h1>
+    <table id="statsTable">
+        <th>History</th>
+        <tr>
+            <td class="statsCategory">Games Won</td>
+            <td class="statsResult" id="statWinVal">0</td>
+        </tr>
+        <tr>
+            <td class="statsCategory">Games Lost</td>
+            <td class="statsResult" id="statLoseVal">0</td>
+        </tr>
+        <tr>
+            <td class="statsCategory">Win %</td>
+            <td class="statsResult" id="statPerVal">0</td>
+        </tr>
+        <tr>
+            <td class="statsCategory">Current Streak</td>
+            <td class="statsResult" id="statCurrVal">0</td>
+        </tr>
+        <tr>
+            <td class="statsCategory">Longest Streak</td>
+            <td class="statsResult" id="statStreakVal">0</td>
+        </tr>
+        <tr>
+            <td class="statsCategory">Total Games Played</td>
+            <td class="statsResult" id="statTotalGames">0</td>
+        </tr>
+    </table>
+</body>
+</html>

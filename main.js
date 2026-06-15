@@ -1,14 +1,18 @@
 import { checkMatch, startGame, deck, cardPanel, updateCardPanel, checkGameStatus, flipCount, countNumer, handleClues } from "./board.js";
+import { handleStats } from "./user.js";
 document.addEventListener('DOMContentLoaded', () => {
     
     const playBtn = document.getElementById('playBtn');
+    const container = document.getElementById('homeBtnContainer');
+    const home = document.getElementById('home');
+    const nameHolder = document.getElementById('changeName');
     const levelSelectDisplay = document.querySelector('.levelSelectHeader');
 
     function pressPlay() {
 
         levelSelectDisplay.classList.remove('hidden');
-
-        playBtn.classList.add('hidden','active');
+        home.classList.remove('hidden');
+        container.classList.add('hidden','active');
 
         document.querySelectorAll('.levelSelectBtn').forEach((btn) => {
 
@@ -25,6 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem('redir');
 
     };
+
+    if (location.href.split('/').pop().slice(0,7) == 'profile') { 
+            
+        handleStats();
+        
+    }
     
     document.addEventListener('click', (e) => {
 
@@ -34,12 +44,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (e.target.id == 'cluePanel') { handleClues() };
 
+        if (e.target.id == 'statsBtn') { window.location = "../user/profile.html"};
+
         if  (e.target.id == 'backHome') {
 
-            localStorage.setItem('redir','true');
+            // if (document.querySelector('.startBtn')) { localStorage.setItem('redir','true') }
             window.location = "../";
 
         };
+
+        if (e.target.id == 'changeName') {
+
+            const decision = confirm('Would you like to change your username?');
+
+            if (decision) {
+
+                const name = prompt('Enter your new name');
+
+                name ? null : name = localStorage.getItem('username');
+
+                localStorage.setItem('username',name);
+
+                nameHolder.innerHTML = name;
+
+            }
+
+        };
+
+        if (e.target.id == 'home') { location.reload() }; 
 
         if (e.target.classList.contains('clueBodyText')) { handleClues() };
 
