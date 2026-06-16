@@ -15,6 +15,8 @@ export var clockPanelBody = document.getElementById("clockPanel");
 export var countNumer = document.getElementById("countNumer");
 export var countDenom = document.getElementById("countDenom");
 export var flipCount = document.getElementById("flipCount");
+export var [numberHold,countHold,expHold] = [0,0,0];
+export var cluesUsed = 0;
 export var winStatus = false;
 
 export function updateCardPanel() {
@@ -126,15 +128,17 @@ export function handleClues(init=false) {
         }
     });
     clueCount--;
+    cluesUsed++;
     clueCountBody.innerHTML = Number(clueCountBody.innerHTML - 1);
     if (!clueCount) { cluePanelBody.classList.add('hidden')};
 };
-export function nextLevel(next=true) {
+export function nextLevel(next=true,exp=expHold) {
 
     var wins = Number(localStorage.getItem("wins"));
     // var losses = Number(localStorage.getItem("loss"));
     var currentStreak = Number(localStorage.getItem("streak"));
     var longestStreak = Number(localStorage.getItem("record"));
+    var exp = Number(localStorage.getItem("exp"));
 
     longestStreak ? null : localStorage.setItem("record",1);
 
@@ -162,9 +166,23 @@ export function nextLevel(next=true) {
 
         localStorage.setItem("record",currentStreak);
 
-    } 
+    }
+
+    if (exp) {
+
+        localStorage.setItem("exp", exp + expHold);
+
+    } else {
+
+        localStorage.setItem("exp", expHold);
+
+    }
+
+    console.log(localStorage.getItem("exp"));
 
     winStatus = false;
+
+    expHold = 0;
 
     if (next) { 
         location.reload();
@@ -178,7 +196,7 @@ export function statusMessage(type='win') {
     switch(type) {
         case 'win':
             setTimeout(() => { 
-                decision = confirm('Level Complete!\n\nReady for the next one?');
+                decision = confirm(`Level Complete!\nYou earned ${expHold} XP\nReady for the next one?`);
                 decision ? nextLevel() : nextLevel(false);
             },750);
             break;
@@ -202,6 +220,7 @@ export function checkGameStatus(type='clock') {
 
     if (type == 'win' && cardPanel.length == 0) { 
 
+        calcExp(numberHold,countHold);
         winStatus = true;
         statusMessage('win');
 
@@ -256,6 +275,26 @@ export function startClock(time) {
     var countDown = setInterval(() => { countdownClock() },1000);
 
 };
+export function calcExp(number,count) {
+
+    var result = 0;
+    var range = pickRandom([1,2,3,4,5]);
+    var secondsLeft = Number(secondBody.innerHTML);
+    var minutesLeft = Number(minuteBody.innerHTML);
+    var flipsLeft = Number(flipCount.innerHTML);
+    
+    result += Math.floor(secondsLeft/7);
+    result += minutesLeft*7;
+    result += flipsLeft;
+    result += range;
+    result += number;
+    result += count;
+    while (cluesUsed) {
+        result -= Math.floor(result*10/100);
+        cluesUsed--;
+    }
+    expHold = result;
+}
 
 
 
@@ -264,6 +303,8 @@ export function startClock(time) {
 
 
 export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1,time=90) {
+
+    var exp = 0;
     
     switch(level) {
         case 'easy':
@@ -274,28 +315,36 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
             time = pickRandom([75,75,80,90,100]);
             break;
         case 'medium':
-            number = pickRandom([9,10,11,12,13]);
-            count = number - pickRandom([2,3,4]);
+            number = pickRandom([8,9,10,11,12]);
+            count = number - pickRandom([1,2,3]);
             attempts = pickRandom([18,20,22,25]);
-            number >= 12 ? clues = 2 : clues = 1;
+            number >= 11 ? clues = 2 : clues = 1;
+            count >= 9 ? count-- : null;
             time = pickRandom([50,60,75,80,90]);
             break;
         case 'hard':
-            number = pickRandom([14,14,15,15,16]);
+            number = pickRandom([13,13,14,14,14,15,15]);
             count = number - pickRandom([4,5,6]);
             count >= 9 ? count-- : count+=2;
-            attempts = pickRandom([20,21,22,24,25,26,28]);
-            number >= 16 ? clues = 2 : number >= 15 ? clues = 1 : clues = 0;
-            time = pickRandom([45,50,50,60,60,75]);
+            attempts = pickRandom([23,24,25,26,27]);
+            number >= 15 ? clues = 2 : number >= 14 ? clues = 1 : clues = 0;
+            time = pickRandom([50,55,60,60,75]);
             break;
         case 'exhibition':
-            number = pickRandom([25,26,27,28,29]);
+            number = pickRandom([24,25,26,27,28]);
             count = number - pickRandom([7,8,9,10]);
-            clues = Math.floor((count/2)-pickRandom([5,6,7]));
+            clues = Math.floor((count/2)-pickRandom([4,5,6]));
             clues >= 5 ? clues -= 2 : null;
-            count >= 30 ? count-=15 : count >= 20 ? count-= 8 : null;
+            count >= 20 ? count-=8 : count >= 15 ? count-= 4 : null;
             attempts = pickRandom([40,45,50,55]);
-            time = pickRandom([120,150,150,150,180,180]);
+            time = pickRandom([140,150,150,150,180,180]);
+            break;
+        case 'allbutone':
+            number = 8;
+            count = number;
+            clues = 0;
+            attempts = 8;
+            time = pickRandom([75,80,85,90]);
             break;
         default: 
             break;
@@ -313,6 +362,8 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
     flipCount.innerHTML = attempts;
     clockPanelBody.classList.add('flicker');
     cardPanelBody.classList.remove('hidden');
+    numberHold = number; 
+    countHold = count;
     
     deployCards(number,count);
     displayCards();

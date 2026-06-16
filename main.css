@@ -11,7 +11,9 @@
     --mediumDifficulty: rgb(255, 191, 72);
     --hardDifficulty: rgb(255, 77, 0);
     --extremeDifficulty: rgb(169, 0, 121);
+    --hiddenLevelDifficulty: linear-gradient(120deg, cyan, blue, purple,pink);
     --text: grey;
+    --hiddenLevel: rgb(255, 69, 168);
     --profileBgColor: #d3d3d3;
     --clue: rgb(0, 157, 255);
     --facedown: rgb(142, 0, 0);
@@ -35,6 +37,7 @@ a {
 *.hidden {
     opacity: 0;
     visibility: hidden;
+    position: absolute;
 }
 button {
     position: relative;
@@ -84,26 +87,13 @@ td #cardCount {
     letter-spacing: 1.2px;
 }
 #navBar button:disabled {
-    background-color: var(--text);
-    color: rgba(0, 0, 0, 0.08);
     cursor:none;
 }
-#navBar button.diffEasy {
-    background-color: var(--easyDifficulty);
-    color: white;
-}
-#navBar button.diffMedium {
-    background-color: var(--mediumDifficulty);
-    color: white;
-}
-#navBar button.diffHard {
-    background-color: var(--hardDifficulty);
-    color: white;
-}
-#navBar button.diffExhi {
-    background-color: var(--extremeDifficulty);
-    color: white;
-}
+#navBar button.diffEasy { background-color: var(--easyDifficulty) }
+#navBar button.diffMedium { background-color: var(--mediumDifficulty) }
+#navBar button.diffHard { background-color: var(--hardDifficulty) }
+#navBar button.diffExhi { background-color: var(--extremeDifficulty) }
+#navBar button.diffBonus { background-image: var(--hiddenLevelDifficulty) }
 
 
 
@@ -151,6 +141,10 @@ td #cardCount {
 .levelSelectBtn#playexhibition {
     color: var(--hardDifficulty);
     border-color: var(--hardDifficulty);
+}
+.levelSelectBtn.hiddenLevel {
+    color: var(--hiddenLevel);
+    border-color: var(--hiddenLevel);
 }
 .levelSelectBtn {
     font-size: 1.5rem;
@@ -460,10 +454,21 @@ body #statsTable td.statsCategory {
     /* display: flex; */
     /* justify-content: end; */
  }
-#welcomeProfile {
+#welcomeContainer {
     position: absolute;
-    font-family: var(--fontFamily);
     top: 10vh;
+}
+#welcomeProfile {
+    position: relative;
+    font-family: var(--fontFamily);
+}
+#expBarContainer {
+    position: absolute;
+    bottom: -2rem;
+    left: 50%;
+    font-size: 50%;
+    transform: translateX(-50%);
+    color: var(--text)
 }
 #resetWL {
     font-family: Impact;

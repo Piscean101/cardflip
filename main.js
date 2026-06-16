@@ -1,4 +1,4 @@
-import { checkMatch, startGame, deck, cardPanel, updateCardPanel, checkGameStatus, flipCount, countNumer, handleClues } from "./board.js";
+import { checkMatch, startGame, deck, cardPanel, updateCardPanel, checkGameStatus, flipCount, countNumer, handleClues, expHold, cluesUsed } from "./board.js";
 import { handleReloadWL, handleStats } from "./user.js";
 document.addEventListener('DOMContentLoaded', () => {
     
@@ -16,8 +16,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.querySelectorAll('.levelSelectBtn').forEach((btn) => {
 
-            btn.classList.remove('hidden');
-            btn.classList.add('active');
+            if (!btn.classList.contains('hiddenLevel')) {
+                
+                btn.classList.remove('hidden');
+                btn.classList.add('active');
+
+            }
+
+            if (Number(localStorage.getItem("exp")) >= 500) {
+
+                var ABO = document.getElementById("playallbutone");
+
+                ABO.classList.remove('hidden');
+                ABO.classList.add('active');
+
+            }
+ 
 
         });
 

@@ -6,21 +6,23 @@ export function handleStats() {
     var currentStreak = document.getElementById('statCurrVal');
     var longestStreak = document.getElementById('statStreakVal');
     var totalGames = document.getElementById('statTotalGames');
+    var expValue = document.getElementById('expValue');
     
     localStorage.getItem('username') ? nameHolder.innerHTML = localStorage.getItem('username') : null;
     localStorage.getItem('wins') ? winStats.innerHTML = localStorage.getItem('wins') : null;
     localStorage.getItem('loss') ? loseStats.innerHTML = localStorage.getItem('loss') : null;
     localStorage.getItem('streak') ? currentStreak.innerHTML = localStorage.getItem('streak') : null;
     localStorage.getItem('record') ? longestStreak.innerHTML = localStorage.getItem('record') : null;
+    localStorage.getItem('exp') ? expValue.innerHTML = localStorage.getItem('exp') : null;
     document.getElementById('statTotalGames').innerHTML = Number(winStats.innerHTML) + Number(loseStats.innerHTML);
 
     var perTest = (Number(winStats.innerHTML) / Number(totalGames.innerHTML) * 100).toFixed(1);
 
-    (perTest) ? percentWin.innerHTML = perTest : null;
+    (perTest) ? percentWin.innerHTML = `${perTest}%` : null;
 
     percentWin.innerHTML == 'NaN' ? percentWin.innerHTML = '-' : null;
 
-    percentWin.innerHTML == 'NaN' ? percentWin.innerHTML = '-' : null;
+    percentWin.innerHTML == 'NaN%' ? percentWin.innerHTML = '-' : null;
 
     var N = Number(percentWin.innerHTML.replace("%",""));
 
@@ -35,7 +37,7 @@ export function handleStats() {
 
 export function handleReloadWL() {
 
-    const decision = confirm(`Are you sure you want to reset your Win / Loss history?\nYour streaks won't be affected`);
+    const decision = confirm(`Are you sure you want to reset your Win / Loss history?\nYou may lose access to some game modes\nYour streaks won't be affected`);
 
     if (decision) {
         localStorage.setItem("wins",0);
@@ -44,3 +46,13 @@ export function handleReloadWL() {
     }
      
 }
+
+// export function addBadge(badge) {
+
+//     const badges = localStorage.getItem("badges");
+
+//     badges ? badges.push(badge) : localStorage.setItem("badges",[badge]);
+
+//     return localStorage.getItem("badges");
+    
+// }
