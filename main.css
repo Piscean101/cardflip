@@ -474,7 +474,16 @@ body #statsTable td.statsCategory {
     color: white;
     letter-spacing: 1px;
     padding: 0.5rem 0.25rem;
+    border: none;
 }
+#resetWLCell {
+    position: absolute;
+    width: 50%;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -4rem;
+}
+
 
 
 
