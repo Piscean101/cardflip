@@ -16,7 +16,9 @@ export function handleStats() {
 
     var perTest = (Number(winStats.innerHTML) / Number(totalGames.innerHTML) * 100).toFixed(1);
 
-    typeof(perTest) == 'Number' ? percentWin.innerHTML = perTest : percentWin.innerHTML = '-';
+    (perTest) ? percentWin.innerHTML = perTest : null;
+
+    percentWin.innerHTML == 'NaN%' ? percentWin.innerHTML = '-' : null;
 
     var N = Number(percentWin.innerHTML.replace("%",""));
 
