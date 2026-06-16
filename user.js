@@ -18,7 +18,9 @@ export function handleStats() {
 
     (perTest) ? percentWin.innerHTML = perTest : null;
 
-    percentWin.innerHTML == 'NaN%' ? percentWin.innerHTML = '-' : null;
+    percentWin.innerHTML == 'NaN' ? percentWin.innerHTML = '-' : null;
+
+    percentWin.innerHTML == 'NaN' ? percentWin.innerHTML = '-' : null;
 
     var N = Number(percentWin.innerHTML.replace("%",""));
 

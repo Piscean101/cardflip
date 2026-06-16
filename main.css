@@ -480,8 +480,8 @@ body #statsTable td.statsCategory {
     position: absolute;
     width: 50%;
     left: 50%;
-    transform: translateX(-50%);
-    bottom: -4rem;
+    transform: translate(-50%,20px);
+    bottom: -(50*vw);
 }
 
 
