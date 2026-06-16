@@ -1,5 +1,5 @@
 import { checkMatch, startGame, deck, cardPanel, updateCardPanel, checkGameStatus, flipCount, countNumer, handleClues } from "./board.js";
-import { handleStats } from "./user.js";
+import { handleReloadWL, handleStats } from "./user.js";
 document.addEventListener('DOMContentLoaded', () => {
     
     const playBtn = document.getElementById('playBtn');
@@ -53,13 +53,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         };
 
+        if (e.target.id == 'resetWL') {
+
+            handleReloadWL();
+
+        }
+
         if (e.target.id == 'changeName') {
 
             const decision = confirm('Would you like to change your username?');
 
             if (decision) {
 
-                const name = prompt('Enter your new name');
+                const name = prompt('Enter your new name').slice(0,11);
 
                 name ? null : name = localStorage.getItem('username');
 

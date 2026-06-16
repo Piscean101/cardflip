@@ -158,7 +158,7 @@ export function nextLevel(next=true) {
 
     }
 
-    if (currentStreak > longestStreak) {
+    if (currentStreak >= longestStreak) {
 
         localStorage.setItem("record",currentStreak);
 
@@ -281,20 +281,20 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
             time = pickRandom([50,60,75,80,90]);
             break;
         case 'hard':
-            number = pickRandom([13,14,15,16,17]);
-            count = number - pickRandom([6,7,8]);
-            count >= 7 ? count-- : count++;
-            attempts = pickRandom([22,24,25,26,28,30]);
-            number >= 16 ? clues = 2 : number >= 14 ? clues = 1 : clues = 0;
+            number = pickRandom([14,14,15,15,16]);
+            count = number - pickRandom([4,5,6]);
+            count >= 9 ? count-- : count+=2;
+            attempts = pickRandom([20,21,22,24,25,26,28]);
+            number >= 16 ? clues = 2 : number >= 15 ? clues = 1 : clues = 0;
             time = pickRandom([45,50,50,60,60,75]);
             break;
         case 'exhibition':
-            number = pickRandom([27,28,29,30,31]);
+            number = pickRandom([25,26,27,28,29]);
             count = number - pickRandom([7,8,9,10]);
             clues = Math.floor((count/2)-pickRandom([5,6,7]));
             clues >= 5 ? clues -= 2 : null;
             count >= 30 ? count-=15 : count >= 20 ? count-= 8 : null;
-            attempts = pickRandom([30,35,40,45]);
+            attempts = pickRandom([40,45,50,55]);
             time = pickRandom([120,150,150,150,180,180]);
             break;
         default: 

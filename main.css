@@ -373,7 +373,7 @@ table {
 }
 .clueGlow {
     border: 2px solid var(--clue);
-    box-shadow: 0px 0px 12px 0px white;
+    box-shadow: 0px 0px 12px 4px white;
 }
 #cluePanel {
     z-index: 100;
@@ -464,6 +464,16 @@ body #statsTable td.statsCategory {
     position: absolute;
     font-family: var(--fontFamily);
     top: 10vh;
+}
+#resetWL {
+    font-family: Impact;
+    width: 100%;
+    background-color: var(--clue);
+    font-size: 120%;
+    line-height: 1.25;
+    color: white;
+    letter-spacing: 1px;
+    padding: 0.5rem 0.25rem;
 }
 
 

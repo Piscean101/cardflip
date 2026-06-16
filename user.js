@@ -14,9 +14,9 @@ export function handleStats() {
     localStorage.getItem('record') ? longestStreak.innerHTML = localStorage.getItem('record') : null;
     document.getElementById('statTotalGames').innerHTML = Number(winStats.innerHTML) + Number(loseStats.innerHTML);
 
-    var perTest = `${(Number(winStats.innerHTML) / Number(totalGames.innerHTML) * 100).toFixed(1)}%`;
+    var perTest = (Number(winStats.innerHTML) / Number(totalGames.innerHTML) * 100).toFixed(1);
 
-    typeof(perTest) == 'string' ? percentWin.innerHTML = perTest : percentWin.innerHTML = '-';
+    typeof(perTest) == 'Number' ? percentWin.innerHTML = perTest : percentWin.innerHTML = '-';
 
     var N = Number(percentWin.innerHTML.replace("%",""));
 
@@ -27,4 +27,16 @@ export function handleStats() {
     N >= 40 ? percentWin.style.color = '#BE800B' :
     N >= 30 ? percentWin.style.color = '#AE2029' : null;
 
+}
+
+export function handleReloadWL() {
+
+    const decision = confirm(`Are you sure you want to reset your Win / Loss history?\nYour streaks won't be affected`);
+
+    if (decision) {
+        localStorage.setItem("wins",0);
+        localStorage.setItem("loss",0);
+        location.reload();
+    }
+     
 }
