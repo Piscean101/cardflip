@@ -487,6 +487,36 @@ body #statsTable td.statsCategory {
 
 
 
+
+
+
+
+
+#maintenance {
+    position: absolute;
+    z-index: 1000;
+    width: 102vw;
+    height: 100vh;
+    /* background-color: var(--welcomePageBgColor); */
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    top: 0;
+    color: var(--text);
+    font-family: consolas;
+    font-size: 75%;
+}
+#maintenance h1 {
+    z-index: 1001;
+    font-size: 8vw;
+    margin: 2rem;
+    color: var(--goodGreen)
+}
+
+
+
 @keyframes spin {
   from {transform: translate(-50%, -50%) rotate(0);}
   to   {transform: translate(-50%, -50%) rotate(360deg);}
@@ -518,6 +548,9 @@ body #statsTable td.statsCategory {
 
 @media only screen and (min-width:300px) {
     #boardRow { max-width: 40vw; height: 35vh };
+}
+@media only screen and (max-width: 800px) {
+    /* #maintenance h1 { margin: 3rem 3rem } */
 }
 @media only screen and (max-width: 650px) {
     #statsTable {
