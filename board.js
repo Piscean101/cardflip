@@ -153,6 +153,8 @@ export function nextLevel(next=true,exp=expHold) {
     var longestStreak = Number(localStorage.getItem("record"));
     var exp = Number(localStorage.getItem("exp"));
 
+    localStorage.setItem("loss",Number(localStorage.getItem("loss"))-1);
+
     longestStreak ? null : localStorage.setItem("record",1);
 
     if (wins) {
@@ -220,7 +222,9 @@ export function statusMessage(type='win') {
     switch(type) {
 
         case 'win':
-            setTimeout(() => { 
+            setTimeout(() => {
+                calcExp(numberHold,countHold);
+                winStatus = true;
                 decision = confirm(`Level Complete!\nYou earned ${expHold} XP\nReady for the next one?`);
                 decision ? nextLevel() : nextLevel(false);
             },750);
@@ -244,8 +248,6 @@ export function checkGameStatus(type='clock') {
 
     if (type == 'win' && cardPanel.length == 0) { 
 
-        calcExp(numberHold,countHold);
-        winStatus = true;
         statusMessage('win');
 
     };
@@ -399,6 +401,7 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
     cardPanelBody.classList.remove('hidden');
     numberHold = number; 
     countHold = count;
+    addStat("loss");
     
     deployCards(number,count);
     displayCards();
