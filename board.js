@@ -329,6 +329,24 @@ export function calcExp(number,count) {
     
     }
 
+    switch (difficulty) {
+        case 'easy':
+            break;
+        case 'medium':
+            result*=1.15;
+            break;
+        case 'hard':
+            result*=1.3;
+            break;
+        case 'exhibition':
+            result*=1.5;
+            break;
+        default:
+            break;
+    }
+
+    result = Math.floor(result);
+
     expHold = result;
 
 }
