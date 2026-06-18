@@ -8,25 +8,26 @@
     <title>Welcome</title>
 </head>
 <body id="welcomePageBg">
-    <div id="maintenance">
+    <!-- <div id="maintenance">
         <h3>Sorry, this site is currently</h3>
         <h1>Under Maintenance...</h1>
         <h3>Please check back later</h3>
-    </div>
+    </div> -->
     <div id="navBar">
         <button id="home" class="hidden">&lt; Back</button>
     </div>
     <div id="homeBtnContainer">
         <button id="playBtn" class="homeBtn homeUI">PLAY</button>
-        <a href="./user/profile.html"><button id="statsBtn" class="homeBtn homeUI">PROFILE</button></a>
+        <a href="./user/profile.html"><button id="statsBtn" class="homeBtn homeUI secondHomeUI">PROFILE</button></a>
+        <a href="./user/rules.html"><button id="howToBtn" class="homeBtn homeUI secondHomeUI">RULES</button></a>
     </div>
     <div id="levelSelectContainer">
-    <p class="levelSelectHeader hidden">Choose a Difficulty</p>
+    <p class="levelSelectHeader hidden">Choose a Game Mode</p>
     <button id="playeasy" class="homeBtn levelSelectBtn hidden">Easy</button>
     <button id="playmedium" class="homeBtn levelSelectBtn hidden">Medium</button>
     <button id="playhard" class="homeBtn levelSelectBtn hidden">Hard</button>
     <button id="playexhibition" class="homeBtn levelSelectBtn hidden">X</button>
-    <button id="playallbutone" class="homeBtn levelSelectBtn hiddenLevel hidden">A</button>
+    <button id="playallbutone" class="homeBtn levelSelectBtn hiddenLevel noshow">A</button>
     </div>
 </body>
 </html>

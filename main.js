@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 var ABO = document.getElementById("playallbutone");
 
-                ABO.classList.remove('hidden');
+                ABO.classList.remove('noshow');
                 ABO.classList.add('active');
 
             }
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (decision) {
 
-                const name = prompt('Enter your new name').slice(0,11);
+                const name = prompt('Enter your new name').slice(0,21);
 
                 name ? null : name = localStorage.getItem('username');
 

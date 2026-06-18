@@ -11,7 +11,7 @@
     --mediumDifficulty: rgb(255, 191, 72);
     --hardDifficulty: rgb(255, 77, 0);
     --extremeDifficulty: rgb(169, 0, 121);
-    --hiddenLevelDifficulty: linear-gradient(120deg, cyan, blue, purple,pink);
+    --hiddenLevelDifficulty: linear-gradient(120deg, rgb(0,157,255), blue, purple);
     --text: grey;
     --hiddenLevel: rgb(255, 69, 168);
     --profileBgColor: #d3d3d3;
@@ -35,6 +35,10 @@ a {
     position: relative;
 }
 *.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+*.noshow {
     opacity: 0;
     visibility: hidden;
     position: absolute;
@@ -127,13 +131,27 @@ td #cardCount {
     justify-content: center;
     margin-bottom: 2rem;
 }
-#statsBtn {
+#howToBtn {
     padding: 10px 20px;
     color: var(--clue);
     font-size: 2rem;
     box-shadow: 0px 0px 15px 3px inset var(--goodGreen);
     padding: 0px 4rem;
-    max-width: 60vw;
+    min-width: 20vw;
+    max-width: 70vw;
+    border-color: var(--clue);
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+#statsBtn {
+    padding: 10px 20px;
+    color: var(--clue);
+    min-width: 20vw;
+    font-size: 2rem;
+    box-shadow: 0px 0px 15px 3px inset var(--goodGreen);
+    padding: 0px 4rem;
+    max-width: 70vw;
     border-color: var(--clue);
     display: flex;
     justify-content: center;
@@ -186,6 +204,7 @@ td #cardCount {
     color: var(--goodGreen);
     -webkit-text-stroke: 0.2rem var(--secondaryColor);
 }
+
 
 
 
@@ -409,7 +428,7 @@ table {
 
 
 
-#profileBody { 
+#profileBody, #rulesBody { 
     background-color: var(--profileBgColor);
 }
 #changeName:hover {
@@ -493,7 +512,32 @@ body #statsTable td.statsCategory {
 
 
 
+/** RULES PAGE  **/
 
+
+
+#rulesBody {
+    overflow-y: scroll;
+}
+#rulesTable td {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 1rem;
+    font-family: var(--fontFamily);
+    font-weight: bold;
+}
+.helpImg {
+    width: 80vw;
+    height: 30vh;
+    margin: none;
+}
+#helpOneImg {
+    background-image: url("../images/diffStart.png");
+}
+#helpTwoImg {
+    background-image: url("../images/boardTimer.png");
+}
 
 
 
@@ -554,18 +598,29 @@ body #statsTable td.statsCategory {
 @media only screen and (min-width:300px) {
     #boardRow { max-width: 40vw; height: 35vh };
 }
-@media only screen and (max-width: 800px) {
-    /* #maintenance h1 { margin: 3rem 3rem } */
+@media only screen and (max-width: 1200px) {
+    /* #welcomePageBg #homeBtnContainer .secondHomeUI {
+        min-width: 40vw;
+    } */
 }
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 900px) {
+    /* #maintenance h1 { margin: 3rem 3rem } */
     #statsTable {
         left: 50%;
         transform: translateX(-50%);
         width: 80vw;
     }
+    /* #welcomePageBg #homeBtnContainer .secondHomeUI {
+        min-width: 40vw;
+    } */
+}
+@media only screen and (max-width: 700px) {
     #playBtn { font-size: 8rem };
     #statsBtn { font-size: 4rem };
     #startBtn { max-width: 90vw; };
+    .secondHomeUI {
+        font-size: 2rem;
+    }
 }
 @media only screen and (max-width: 450px) {
     #playBtn { font-size: 5rem };

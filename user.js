@@ -7,6 +7,8 @@ export function handleStats() {
     var longestStreak = document.getElementById('statStreakVal');
     var totalGames = document.getElementById('statTotalGames');
     var expValue = document.getElementById('expValue');
+    var cluesUsed = document.getElementById('statCluesUsed');
+    var noClue = document.getElementById('statNoClue');
     
     localStorage.getItem('username') ? nameHolder.innerHTML = localStorage.getItem('username') : null;
     localStorage.getItem('wins') ? winStats.innerHTML = localStorage.getItem('wins') : null;
@@ -14,6 +16,8 @@ export function handleStats() {
     localStorage.getItem('streak') ? currentStreak.innerHTML = localStorage.getItem('streak') : null;
     localStorage.getItem('record') ? longestStreak.innerHTML = localStorage.getItem('record') : null;
     localStorage.getItem('exp') ? expValue.innerHTML = localStorage.getItem('exp') : null;
+    localStorage.getItem('cluesused') ? cluesUsed.innerHTML = localStorage.getItem('cluesused') : null;
+    localStorage.getItem('noclue') ? noClue.innerHTML = localStorage.getItem('noclue') : null;
     document.getElementById('statTotalGames').innerHTML = Number(winStats.innerHTML) + Number(loseStats.innerHTML);
 
     var perTest = (Number(winStats.innerHTML) / Number(totalGames.innerHTML) * 100).toFixed(1);
@@ -37,11 +41,16 @@ export function handleStats() {
 
 export function handleReloadWL() {
 
-    const decision = confirm(`Are you sure you want to reset your Win / Loss history?\nYou may lose access to some game modes\nYour streaks won't be affected`);
+    const decision = confirm(`Are you sure you want to reset your Win / Loss history?\n\n
+        *You may temporarily lose access to certain game modes\n
+        *Your Current Streak and Total Games will also be reset\n
+        *Your Longest Streak record won't be affected\n
+        *You will not lose EXP`);
 
     if (decision) {
         localStorage.setItem("wins",0);
         localStorage.setItem("loss",0);
+        localStorage.setItem("streak",0);
         location.reload();
     }
      

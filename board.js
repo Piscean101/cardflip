@@ -120,17 +120,30 @@ export function displayCards() {
     hiddenCards.forEach((e) => { e.classList.remove('hidden')});
 
 };
+function addStat(stat) {
+    localStorage.getItem(stat) ? localStorage.setItem(stat,Number(localStorage.getItem(stat))+1) : localStorage.setItem(stat,1);
+};
 export function handleClues(init=false) {
+
     var cards = document.querySelectorAll(".card");
+
     cards.forEach((e) => {
+
         if (e.innerHTML == cardPanelBody.innerHTML) {
-            e.classList.add('clueGlow')
+
+            e.classList.add('clueGlow');
+
         }
+
     });
+
     clueCount--;
     cluesUsed++;
+    addStat("cluesused");
     clueCountBody.innerHTML = Number(clueCountBody.innerHTML - 1);
+
     if (!clueCount) { cluePanelBody.classList.add('hidden')};
+
 };
 export function nextLevel(next=true,exp=expHold) {
 
@@ -162,6 +175,9 @@ export function nextLevel(next=true,exp=expHold) {
 
     }
 
+    currentStreak = Number(localStorage.getItem("streak"));
+    longestStreak = Number(localStorage.getItem("record"));
+
     if (currentStreak >= longestStreak) {
 
         localStorage.setItem("record",currentStreak);
@@ -178,22 +194,31 @@ export function nextLevel(next=true,exp=expHold) {
 
     }
 
-    console.log(localStorage.getItem("exp"));
-
     winStatus = false;
 
     expHold = 0;
 
     if (next) { 
+
         location.reload();
+
     } else {
+
         window.location = "../";
+
     }
 
 };
+export function handleGameLose() {
+    localStorage.setItem("streak",0);
+    addStat("loss");
+}
 export function statusMessage(type='win') {
+
     var decision = true;
+
     switch(type) {
+
         case 'win':
             setTimeout(() => { 
                 decision = confirm(`Level Complete!\nYou earned ${expHold} XP\nReady for the next one?`);
@@ -201,19 +226,18 @@ export function statusMessage(type='win') {
             },750);
             break;
         case 'timeout':
-            localStorage.setItem("streak",0);
-            localStorage.getItem("loss") ? localStorage.setItem("loss",Number(localStorage.getItem("loss")) + 1) : localStorage.setItem("loss",1);
+            handleGameLose();
             decision = confirm('Time\'s Up! Game Over.\n\nWant to try again?');
             decision ? location.reload() : window.location = "../";
             break;
         case 'flips':
-            localStorage.setItem("streak",0);
-            localStorage.getItem("loss") ? localStorage.setItem("loss",Number(localStorage.getItem("loss")) + 1) : localStorage.setItem("loss",1);
+            handleGameLose();
             alert('You are out of actions! Better luck next time.');
             setTimeout(() => { location.reload() }, 500);
             break;
         default:
             break;
+           
     }
 };
 export function checkGameStatus(type='clock') {
@@ -289,11 +313,22 @@ export function calcExp(number,count) {
     result += range;
     result += number;
     result += count;
+
+    if (cluesUsed == 0) {
+
+        addStat("noclue");
+    
+    }
+
     while (cluesUsed) {
+
         result -= Math.floor(result*10/100);
         cluesUsed--;
+    
     }
+
     expHold = result;
+
 }
 
 
@@ -307,6 +342,7 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
     var exp = 0;
     
     switch(level) {
+
         case 'easy':
             number = pickRandom([7,8,9]);
             count = number - pickRandom([2,3]);
@@ -348,12 +384,11 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
             break;
         default: 
             break;
+
     }
 
     if (number > 50) { number = 50 };
-    if (count > number) { 
-        while (count >= number-1) { count-- }
-    };
+    if (count > number) { while (count >= number-1) { count-- } };
     count >= 8 ? attempts += 5 : count >= 6 ? attempts += 2 : null;
     
     clueCount = clues;
