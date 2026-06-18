@@ -55,7 +55,6 @@ export function handleReloadWL() {
     }
      
 }
-console.log(location);
 // export function addBadge(badge) {
 
 //     const badges = localStorage.getItem("badges");

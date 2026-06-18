@@ -333,7 +333,7 @@ export function calcExp(number,count) {
         case 'easy':
             break;
         case 'medium':
-            result*=1.15;
+            result*=1.2;
             break;
         case 'hard':
             result*=1.3;
@@ -341,6 +341,8 @@ export function calcExp(number,count) {
         case 'exhibition':
             result*=1.5;
             break;
+        case 'allbutone':
+            result*=1.35;
         default:
             break;
     }

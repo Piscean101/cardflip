@@ -1,6 +1,7 @@
 :root {
     --welcomePageBgColor: rgb(0, 110, 20);
     --boardPageBgColor: rgb(59, 59, 59);
+    --profileBgColor: #d3d3d3;
     --mainBrown: rgb(50,25, 0);
     --secondaryBrown: rgb(90,43,0);
     --goodGreen: rgb(0, 189, 0);
@@ -14,9 +15,9 @@
     --hiddenLevelDifficulty: linear-gradient(120deg, rgb(0,157,255), blue, purple);
     --text: grey;
     --hiddenLevel: rgb(255, 69, 168);
-    --profileBgColor: #d3d3d3;
     --clue: rgb(0, 157, 255);
     --facedown: rgb(142, 0, 0);
+    --warning: rgba(255, 0, 0, 0.2);
     --fontFamily: system-ui,'Segoe UI',fantasy;;
     --clockPanelHeight: 10vh;
 }
@@ -71,16 +72,34 @@ td #cardCount {
 }
 .text {
     color: var(--text);
+    font-style: italic;
 }
 .tip {
     font-family: Impact;
-    color: var(--clue);
+    color: navy;
     letter-spacing: 1.5px;
     font-size: 115%;
 }
 .good {
     color: var(--goodGreen);
+}
+.highlight {
+    color: var(--easyDifficulty);
+    font-size: 125%;
+}
+.userHighlight {
+    color: var(--clue);
+}
+.important {
+    font-weight: bold;
+    font-size: 125%;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+.good, .userHighlight {
+    font-family: Impact;
     font-size: 115%;
+    letter-spacing: 2px;
 }
 
 
@@ -544,6 +563,19 @@ body #statsTable td.statsCategory {
     width: 80vw;
     height: 30vh;
     margin: none;
+}
+.warning {
+    background-color: var(--warning);
+    font-size: 75%;
+    margin-bottom: 1rem;
+}
+.cautionLabel {
+    color: rgb(139, 63, 0);
+    font-size: 125%;
+}
+.warningLabel {
+    color: red;
+    font-size: 125%;
 }
 /* #helpOneImg {
     background-image: url("../user/images/diffStart.png");
