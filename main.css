@@ -533,10 +533,10 @@ body #statsTable td.statsCategory {
     margin: none;
 }
 #helpOneImg {
-    background-image: url("./images/diffStart.png");
+    background-image: url("../user/images/diffStart.png");
 }
 #helpTwoImg {
-    background-image: url("./images/boardTimer.png");
+    background-image: url("../user/images/boardTimer.png");
 }
 
 

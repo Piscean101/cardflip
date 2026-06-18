@@ -42,10 +42,10 @@ export function handleStats() {
 export function handleReloadWL() {
 
     const decision = confirm(`Are you sure you want to reset your Win / Loss history?\n\n
-        *You may temporarily lose access to certain game modes\n
-        *Your Current Streak and Total Games will also be reset\n
-        *Your Longest Streak record won't be affected\n
-        *You will not lose EXP`);
+        --You may temporarily lose access to certain game modes\n
+        --Your Current Streak and Total Games will also be reset\n
+        --Your Longest Streak record won't be affected\n
+        --You will not lose EXP`);
 
     if (decision) {
         localStorage.setItem("wins",0);
@@ -55,7 +55,7 @@ export function handleReloadWL() {
     }
      
 }
-
+console.log(location);
 // export function addBadge(badge) {
 
 //     const badges = localStorage.getItem("badges");
