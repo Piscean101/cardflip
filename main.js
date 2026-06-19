@@ -131,24 +131,24 @@ document.addEventListener('DOMContentLoaded', () => {
             
             e.target.classList.remove('facedown');
             flipCount.innerHTML = Number(flipCount.innerHTML) - 1;
+            var winStatus = checkGameStatus('win');
             
             if (checkMatch(e.target)) {
-
+                
                 countNumer.innerHTML = Number(countNumer.innerHTML) + 1;
                 e.target.classList.add('correct');
                 updateCardPanel();
-
+                checkGameStatus('win');
+                
                 setTimeout(() => {  e.target.classList.add('found') },1500);
-
-                var winStatus = checkGameStatus('win');
-            
+                
             } else {
                 
                 setTimeout(() => { e.target.classList.add('facedown') },1500);
-            
-                winStatus ? null : checkGameStatus('flips');
 
             }
+
+            winStatus ? null : checkGameStatus('flips');
 
         }
 

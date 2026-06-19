@@ -339,13 +339,14 @@ export function calcExp(number,count) {
             result*=0.85;
             break;
         case 'hard':
-            result*=1.25;
+            result*=2;
             break;
         case 'exhibition':
-            result*=3;
+            result*=3.5;
             break;
         case 'allbutone':
-            result*=1.1;
+            result*=1.75;
+            break;
         case 'lottery':
             result*=13;
             break;
@@ -407,8 +408,8 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
             number = 8;
             count = number;
             clues = 0;
-            attempts = 8;
-            time = pickRandom([75,80,85,90]);
+            attempts = 10;
+            time = pickRandom([60]);
             break;
         case 'lottery':
             number = 12;
