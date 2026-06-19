@@ -13,6 +13,7 @@
     --hardDifficulty: rgb(255, 77, 0);
     --extremeDifficulty: rgb(169, 0, 121);
     --hiddenLevelDifficulty: linear-gradient(120deg, rgb(0,157,255), blue, purple);
+    --hiddenLevelLottery: linear-gradient(120deg, orange, gold, var(--goodGreen), green);
     --text: grey;
     --hiddenLevel: rgb(255, 69, 168);
     --clue: rgb(0, 157, 255);
@@ -103,7 +104,10 @@ td #cardCount {
 }
 
 
+
+
 /** NAVIGATION **/
+
 
 
 
@@ -129,10 +133,13 @@ td #cardCount {
 #navBar button.diffHard { background-color: var(--hardDifficulty) }
 #navBar button.diffExhi { background-color: var(--extremeDifficulty) }
 #navBar button.diffBonus { background-image: var(--hiddenLevelDifficulty) }
+#navBar button.diffBonusLott { background-image: var(--hiddenLevelLottery) }
+ 
 
 
 
 /** WELCOME PAGE **/
+
 
 
 
@@ -191,6 +198,10 @@ td #cardCount {
     color: var(--hardDifficulty);
     border-color: var(--hardDifficulty);
 }
+.levelSelectBtn#playlottery {
+    color: var(--secondaryColor);
+    border-color: var(--goodGreen);
+}
 .levelSelectBtn.hiddenLevel {
     color: var(--hiddenLevel);
     border-color: var(--hiddenLevel);
@@ -226,7 +237,6 @@ td #cardCount {
     font-size: 200%;
 }
 .homeBtn:hover {
-    /* box-shadow: 0px 0px 15px 4px var(--secondaryColor); */
     letter-spacing: 0.15rem;
     border: none;
 }
@@ -243,6 +253,7 @@ td #cardCount {
 
 
 
+
 .card {
     height: 1rem;
     width: 1rem;
@@ -250,13 +261,11 @@ td #cardCount {
 #boardRow {
     min-height: 55vh;
     min-width: 80vw;
-/* Make ^ 70vw on mobile */
     left: 50%;
     transform: translateX(-50%);
     max-height: 45vh;
     display: flex;
     justify-content: center;
-    /* flex-wrap: wrap; */
     background-color: transparent;
     overflow-x:scroll;
     overflow-y: auto;
@@ -365,13 +374,11 @@ table {
     display: flex;
     justify-content: center;
     border-radius: 150px;
-    /* transform: translateX(50%); */
 }
 #startBtn:hover {
     background-color: black;
 }
 .gameUI { 
-    /* border: 1px solid white;  */
     color: white; 
     width: 25vw;
     height: 15vh;
@@ -427,8 +434,6 @@ table {
     font-weight: bold;
     letter-spacing: 5px;
     -webkit-text-stroke: 1px var(--clue);
-    /* border: 2px solid white; */
-    /* background-image: linear-gradient(190deg, var(--clue), transparent, var(--clue), transparent); */
 }
 #cluePanel .reminder {
     bottom: 1rem;
@@ -447,14 +452,12 @@ table {
     transform: translateY(-25%);
 }
 .flicker { animation: borderFlicker infinite 45000ms; }
-/* #boardContainer #boardRow #board .card.noclick {
-    pointer-events: none;
-    
-} */
+
 
 
 
 /** PROFILE PAGES **/
+
 
 
 
@@ -501,8 +504,6 @@ body #statsTable td.statsCategory {
     text-align: right;
     padding: 0 0.75rem;
     font-size: 120%;
-    /* display: flex; */
-    /* justify-content: end; */
  }
 #welcomeContainer {
     position: absolute;
@@ -547,6 +548,8 @@ body #statsTable td.statsCategory {
 
 
 
+
+
 #rulesBody {
     overflow-y: scroll;
 }
@@ -577,13 +580,13 @@ body #statsTable td.statsCategory {
     color: red;
     font-size: 125%;
 }
-/* #helpOneImg {
-    background-image: url("../user/images/diffStart.png");
+#rulesBody #rulesTable #tipRow {
+    border-top: 2px solid navy;
 }
-#helpTwoImg {
-    background-image: url("../user/images/boardTimer.png");
-}
- */
+
+
+/**  OTHER **/
+
 
 
 #maintenance {
@@ -591,7 +594,6 @@ body #statsTable td.statsCategory {
     z-index: 1000;
     width: 102vw;
     height: 100vh;
-    /* background-color: var(--welcomePageBgColor); */
     background-color: white;
     display: flex;
     justify-content: center;
@@ -649,15 +651,11 @@ body #statsTable td.statsCategory {
     } */
 }
 @media only screen and (max-width: 900px) {
-    /* #maintenance h1 { margin: 3rem 3rem } */
     #statsTable {
         left: 50%;
         transform: translateX(-50%);
         width: 80vw;
     }
-    /* #welcomePageBg #homeBtnContainer .secondHomeUI {
-        min-width: 40vw;
-    } */
 }
 @media only screen and (max-width: 700px) {
     #playBtn { font-size: 8rem };

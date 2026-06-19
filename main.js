@@ -10,9 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function pressPlay() {
 
+        container.classList.add('hidden','active');
         levelSelectDisplay.classList.remove('hidden');
         home.classList.remove('hidden');
-        container.classList.add('hidden','active');
+        var lottery = Math.floor(Math.random()*13);
+        console.log(lottery)
 
         document.querySelectorAll('.levelSelectBtn').forEach((btn) => {
 
@@ -31,8 +33,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 ABO.classList.add('active');
 
             }
- 
 
+            if (Number(localStorage.getItem("wins")) >= 10) {
+
+                var EX = document.getElementById("playexhibition");
+
+                EX.classList.remove('noshow');
+                EX.classList.add('active');
+
+            }
+
+            if (lottery >= 11) {
+
+                var LOT = document.getElementById("playlottery") 
+
+                LOT.classList.remove('noshow');
+                LOT.classList.add('active');
+
+            }
+ 
         });
 
     };
@@ -102,6 +121,12 @@ document.addEventListener('DOMContentLoaded', () => {
         
         };
 
+        if (e.target.classList.contains('redir')) {
+
+            localStorage.setItem('redir','true');
+
+        }
+
         if (e.target.classList.contains('facedown')) {
             
             e.target.classList.remove('facedown');
@@ -114,15 +139,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 updateCardPanel();
 
                 setTimeout(() => {  e.target.classList.add('found') },1500);
+
+                var winStatus = checkGameStatus('win');
             
             } else {
                 
                 setTimeout(() => { e.target.classList.add('facedown') },1500);
             
-            }
+                winStatus ? null : checkGameStatus('flips');
 
-            checkGameStatus('win') ? null :
-            checkGameStatus('flips') ? null : null;
+            }
 
         }
 

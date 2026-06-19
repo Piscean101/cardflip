@@ -20,7 +20,7 @@ export var cluesUsed = 0;
 export var winStatus = false;
 
 export function updateCardPanel() {
-    cardPanelBody.innerHTML = cardPanel.shift().innerHTML;
+    cardPanel.length ? cardPanelBody.innerHTML = cardPanel.shift().innerHTML : null;
 };
 export function pickRandom(options) {
     return options[Math.floor(Math.random()*options.length)]
@@ -148,7 +148,6 @@ export function handleClues(init=false) {
 export function nextLevel(next=true,exp=expHold) {
 
     var wins = Number(localStorage.getItem("wins"));
-    // var losses = Number(localStorage.getItem("loss"));
     var currentStreak = Number(localStorage.getItem("streak"));
     var longestStreak = Number(localStorage.getItem("record"));
     var exp = Number(localStorage.getItem("exp"));
@@ -213,11 +212,10 @@ export function nextLevel(next=true,exp=expHold) {
 };
 export function handleGameLose() {
     localStorage.setItem("streak",0);
-    addStat("loss");
 }
 export function statusMessage(type='win') {
 
-    var decision = true;
+    var decision = false;
 
     switch(type) {
 
@@ -225,19 +223,23 @@ export function statusMessage(type='win') {
             setTimeout(() => {
                 calcExp(numberHold,countHold);
                 winStatus = true;
-                decision = confirm(`Level Complete!\nYou earned ${expHold} XP\nReady for the next one?`);
-                decision ? nextLevel() : nextLevel(false);
-            },750);
+                difficulty == 'lottery' ? alert(`LOTTERY RESULTS: Congratulations! You won ${expHold} XP!`) : decision = confirm(`Level Complete!\nYou earned ${expHold} XP\nReady for the next one?`);
+                difficulty == 'lottery' ? nextLevel(false) : decision ? nextLevel() : nextLevel(false);
+            },350);
             break;
         case 'timeout':
             handleGameLose();
-            decision = confirm('Time\'s Up! Game Over.\n\nWant to try again?');
-            decision ? location.reload() : window.location = "../";
+            difficulty == 'lottery' ? alert(`Times\'s Up! Lottery Over!`) : decision = confirm('Time\'s Up! Game Over.\n\nWant to try again?');
+            !decision || difficulty == 'lottery' ? window.location = "../" : location.reload();
             break;
         case 'flips':
             handleGameLose();
-            alert('You are out of actions! Better luck next time.');
-            setTimeout(() => { location.reload() }, 500);
+            if (difficulty == 'lottery') {
+                alert(`LOTTERY RESULTS: Lottery Over! You did not win`);
+            } else { 
+                alert('You are out of actions! Better luck next time.');
+            }
+            window.location = "../";
             break;
         default:
             break;
@@ -331,18 +333,22 @@ export function calcExp(number,count) {
 
     switch (difficulty) {
         case 'easy':
+            result*=0.6;
             break;
         case 'medium':
-            result*=1.2;
+            result*=0.85;
             break;
         case 'hard':
-            result*=1.3;
+            result*=1.25;
             break;
         case 'exhibition':
-            result*=1.5;
+            result*=3;
             break;
         case 'allbutone':
-            result*=1.35;
+            result*=1.1;
+        case 'lottery':
+            result*=13;
+            break;
         default:
             break;
     }
@@ -403,6 +409,13 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
             clues = 0;
             attempts = 8;
             time = pickRandom([75,80,85,90]);
+            break;
+        case 'lottery':
+            number = 12;
+            count = 2;
+            clues = 0;
+            attempts = pickRandom([3]);
+            time = 15;
             break;
         default: 
             break;
