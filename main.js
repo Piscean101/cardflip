@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
         levelSelectDisplay.classList.remove('hidden');
         home.classList.remove('hidden');
         var lottery = Math.floor(Math.random()*13);
-        console.log(lottery)
 
         document.querySelectorAll('.levelSelectBtn').forEach((btn) => {
 

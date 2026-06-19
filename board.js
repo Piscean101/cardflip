@@ -212,7 +212,14 @@ export function nextLevel(next=true,exp=expHold) {
 };
 export function handleGameLose() {
     localStorage.setItem("streak",0);
-}
+};
+export function secondStepVeriWin() {
+    var result = false;
+    var n = Number(countNumer.innerHTML);
+    var d = Number(countDenom.innerHTML);
+    n == d ? result = true : null;
+    return result;
+};
 export function statusMessage(type='win') {
 
     var decision = false;
@@ -225,7 +232,7 @@ export function statusMessage(type='win') {
                 winStatus = true;
                 difficulty == 'lottery' ? alert(`LOTTERY RESULTS: Congratulations! You won ${expHold} XP!`) : decision = confirm(`Level Complete!\nYou earned ${expHold} XP\nReady for the next one?`);
                 difficulty == 'lottery' ? nextLevel(false) : decision ? nextLevel() : nextLevel(false);
-            },350);
+            },250);
             break;
         case 'timeout':
             handleGameLose();
@@ -233,13 +240,16 @@ export function statusMessage(type='win') {
             !decision || difficulty == 'lottery' ? window.location = "../" : location.reload();
             break;
         case 'flips':
-            handleGameLose();
-            if (difficulty == 'lottery') {
-                alert(`LOTTERY RESULTS: Lottery Over! You did not win`);
-            } else { 
-                alert('You are out of actions! Better luck next time.');
+            if (!secondStepVeriWin()) {
+                if (difficulty == 'lottery') {
+                    setTimeout(() => { alert(`LOTTERY RESULTS: Lottery Over! You did not win`) }, 250);
+                    setTimeout(() => { window.location = "../"; }, 500);
+                } else { 
+                    setTimeout(() => { alert('You are out of actions! Better luck next time.') }, 250);
+                    setTimeout(() => { location.reload() }, 500)
+                }
             }
-            window.location = "../";
+            handleGameLose();
             break;
         default:
             break;
@@ -248,19 +258,19 @@ export function statusMessage(type='win') {
 };
 export function checkGameStatus(type='clock') {
 
-    if (type == 'win' && cardPanel.length == 0) { 
+    if (type == 'win' && cardPanel.length == 0 && secondStepVeriWin()) { 
 
         statusMessage('win');
 
     };
 
-    if (type == 'clock' && Number(minuteBody.innerHTML == 0) && Number(secondBody.innerHTML == 0) && !winStatus) {
+    if (type == 'clock' && Number(minuteBody.innerHTML == 0) && Number(secondBody.innerHTML == 0) && !secondStepVeriWin()) {
 
         statusMessage('timeout');
 
     };
 
-    if (type == 'flips' && Number(flipCount.innerHTML < 1)) {
+    if (type == 'flips' && Number(flipCount.innerHTML < 1) && !secondStepVeriWin()) {
 
         statusMessage('flips');
 
@@ -342,7 +352,7 @@ export function calcExp(number,count) {
             result*=2;
             break;
         case 'exhibition':
-            result*=3.5;
+            result*=4.5;
             break;
         case 'allbutone':
             result*=1.75;
@@ -358,7 +368,7 @@ export function calcExp(number,count) {
 
     expHold = result;
 
-}
+};
 
 
 
