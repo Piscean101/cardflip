@@ -4,11 +4,11 @@ export var cardPanel = new Array();
 export var cardPanelBody = document.getElementById('cardPanel');
 export var cluePanelBody = document.getElementById("cluePanel");
 export var colors = ['Red','Blue','Green','White','Black'];
+export var options = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
 export var deck = new Array();
 export var clueCount = 0;
 export var clueCountBody = document.getElementById("clueCount");
 export var difficulty = window.location.href.split('/').pop().slice(4).slice(0,-5);
-export var options = ['A','2','3','4','5','6','7','8','9','10','J','Q','K'];
 export var minuteBody = document.getElementById("minutes");
 export var secondBody = document.getElementById("seconds");
 export var clockPanelBody = document.getElementById("clockPanel");
@@ -115,11 +115,48 @@ export function deployCards(number,count) {
 };
 export function displayCards() {
 
-    var hiddenCards = document.querySelectorAll('.hidden');
+    var hiddenCards = document.querySelectorAll('.card.hidden');
     startBtn.classList.add('hidden','active');
     hiddenCards.forEach((e) => { e.classList.remove('hidden')});
 
 };
+export function flipCards(direction='up') {
+    var facedown = document.querySelectorAll('.facedown');
+    var allCards = document.querySelectorAll('.card');
+    if (direction == 'up') {
+        facedown.forEach(e => e.classList.remove('facedown'));
+    } else if (direction == 'down') {
+        allCards.forEach(e => e.classList.add('facedown'));
+    }
+}
+export function revealCardsDelayAction(time=5000) {
+
+    const memoTip = document.getElementById("memoToolTip");
+    const memoLuck = document.getElementById("memoGoodLuck")
+
+    const blockClicks = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    const events = ['click','dblclick','mousedown','mouseup'];
+
+    events.forEach(e => document.addEventListener(e,blockClicks,true));
+
+    displayCards();
+    memoTip.classList.remove('hidden');
+    flipCards('up');
+
+    setTimeout(() => {
+        flipCards('down');
+        updateCardPanel();
+        events.forEach(e => document.removeEventListener(e,blockClicks,true));
+        memoTip.classList.add('hidden');
+        memoLuck.classList.remove('hidden');
+        setTimeout(() => { memoLuck.classList.add('hidden') },1000);
+    },time);
+
+}
 function addStat(stat) {
     localStorage.getItem(stat) ? localStorage.setItem(stat,Number(localStorage.getItem(stat))+1) : localStorage.setItem(stat,1);
 };
@@ -375,7 +412,6 @@ export function calcExp(number,count) {
 /**  */
 
 
-
 export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1,time=90) {
 
     var exp = 0;
@@ -407,6 +443,15 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
             break;
         case 'exhibition':
             number = pickRandom([24,25,26,27,28]);
+            count = number - pickRandom([7,8,9,10]);
+            clues = Math.floor((count/2)-pickRandom([4,5,6]));
+            clues >= 5 ? clues -= 2 : null;
+            count >= 20 ? count-=8 : count >= 15 ? count-= 4 : null;
+            attempts = pickRandom([40,45,50,55]);
+            time = pickRandom([140,150,150,150,180,180]);
+            break;
+        case 'memory':
+            number = pickRandom([10,11,12,13]);
             count = number - pickRandom([7,8,9,10]);
             clues = Math.floor((count/2)-pickRandom([4,5,6]));
             clues >= 5 ? clues -= 2 : null;
@@ -446,11 +491,18 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
     numberHold = number; 
     countHold = count;
     addStat("loss");
-    
+
     deployCards(number,count);
-    displayCards();
-    updateCardPanel();
-    startClock(time);
+
+    if (difficulty == 'memory') {
+        revealCardsDelayAction(6000);
+        setTimeout(() => {startClock(time)},6000);
+    } else {
+        displayCards();
+        updateCardPanel();
+        startClock(time);
+    }
+    
     if (!clues) { cluePanelBody.classList.add('hidden')};
 
 };

@@ -24,6 +24,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             }
 
+            if(Number(localStorage.getItem("exp")) >= 1250 && Number(localStorage.getItem("wins")) >= 15) {
+
+
+                var MEMO = document.getElementById("playmemory");
+
+                MEMO.classList.remove('noshow');
+                MEMO.classList.add('active');
+
+            }
+
             if (Number(localStorage.getItem("exp")) >= 500) {
 
                 var ABO = document.getElementById("playallbutone");
@@ -42,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             }
 
-            if (lottery >= 11) {
+            if (lottery >= 11 && Number(localStorage.getItem("wins")) >= 5) {
 
                 var LOT = document.getElementById("playlottery") 
 
