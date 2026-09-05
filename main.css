@@ -13,11 +13,12 @@
     --mediumDifficulty: rgb(255, 191, 72);
     --hardDifficulty: rgb(255, 77, 0);
     --extremeDifficulty: rgb(169, 0, 121);
-    --memoryDifficulty: linear-gradient(120deg, cyan, navy, green);
+    --memoryDifficulty: linear-gradient(120deg, orange,rgb(207, 63, 207), green);
     --hiddenLevelDifficulty: linear-gradient(120deg, rgb(0,157,255), blue, purple);
     --hiddenLevelLottery: linear-gradient(120deg, orange, gold, var(--goodGreen), green);
     --text: grey;
-    --hiddenLevel: rgb(255, 69, 168);
+    /* --hiddenLevel: rgb(255, 69, 168); */
+    --hiddenLevel: rgb(42, 42, 241);
     --clue: rgb(0, 157, 255);
     --facedown: rgb(142, 0, 0);
     --warning: rgba(255, 0, 0, 0.2);

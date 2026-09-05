@@ -157,8 +157,8 @@ export function revealCardsDelayAction(time=5000) {
     },time);
 
 }
-function addStat(stat) {
-    localStorage.getItem(stat) ? localStorage.setItem(stat,Number(localStorage.getItem(stat))+1) : localStorage.setItem(stat,1);
+function addStat(stat,number=1) {
+    localStorage.getItem(stat) ? localStorage.setItem(stat,Number(localStorage.getItem(stat))+number) : localStorage.setItem(stat,number);
 };
 export function handleClues(init=false) {
 
@@ -397,6 +397,8 @@ export function calcExp(number,count) {
         case 'lottery':
             result*=13;
             break;
+        case 'memory':
+            result*=4;
         default:
             break;
     }
@@ -406,7 +408,6 @@ export function calcExp(number,count) {
     expHold = result;
 
 };
-
 
 
 /**  */
@@ -421,8 +422,8 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
         case 'easy':
             number = pickRandom([7,8,9]);
             count = number - pickRandom([2,3]);
-            attempts = pickRandom([20,25]);
-            number >= 9 ? clues = 2 : clues = 1;
+            attempts = pickRandom([20,22,25]);
+            number >= 10 ? clues = 2 : clues = 1;
             time = pickRandom([75,75,80,90,100]);
             break;
         case 'medium':
@@ -434,10 +435,10 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
             time = pickRandom([50,60,75,80,90]);
             break;
         case 'hard':
-            number = pickRandom([13,13,14,14,14,15,15]);
-            count = number - pickRandom([4,5,6]);
+            number = pickRandom([12,13,13,13,14,15]);
+            count = number - pickRandom([4,5,6,6]);
             count >= 9 ? count-- : count+=2;
-            attempts = pickRandom([23,24,25,26,27]);
+            attempts = pickRandom([23,23,24,25,26]);
             number >= 15 ? clues = 2 : number >= 14 ? clues = 1 : clues = 0;
             time = pickRandom([50,55,60,60,75]);
             break;
@@ -447,17 +448,18 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
             clues = Math.floor((count/2)-pickRandom([4,5,6]));
             clues >= 5 ? clues -= 2 : null;
             count >= 20 ? count-=8 : count >= 15 ? count-= 4 : null;
-            attempts = pickRandom([40,45,50,55]);
+            attempts = pickRandom([55,60,65,70]);
             time = pickRandom([140,150,150,150,180,180]);
             break;
         case 'memory':
-            number = pickRandom([10,11,12,13]);
-            count = number - pickRandom([7,8,9,10]);
-            clues = Math.floor((count/2)-pickRandom([4,5,6]));
-            clues >= 5 ? clues -= 2 : null;
-            count >= 20 ? count-=8 : count >= 15 ? count-= 4 : null;
-            attempts = pickRandom([40,45,50,55]);
-            time = pickRandom([140,150,150,150,180,180]);
+            number = pickRandom([5,6,7]);
+            count = number;
+            // clues = Math.floor((count/2)-pickRandom([4,5,6]));
+            // clues >= 5 ? clues -= 2 : null;
+            // count >= 20 ? count-=8 : count >= 15 ? count-= 4 : null;
+            clues = 0;
+            attempts = number - 1;
+            time = 45;
             break;
         case 'allbutone':
             number = 8;
@@ -478,9 +480,14 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
 
     }
 
-    if (number > 50) { number = 50 };
-    if (count > number) { while (count >= number-1) { count-- } };
-    count >= 8 ? attempts += 5 : count >= 6 ? attempts += 2 : null;
+    if (level != 'memory') {
+
+        if (number > 50) { number = 50 };
+        if (count > number) { while (count >= number-1) { count-- } };
+        count >= 8 ? attempts += 5 : count >= 6 ? attempts += 2 : null;
+        
+    }
+
     
     clueCount = clues;
     clueCountBody.innerHTML = clues;

@@ -1,4 +1,4 @@
-import { checkMatch, startGame, deck, cardPanel, updateCardPanel, checkGameStatus, flipCount, countNumer, handleClues, expHold, cluesUsed } from "./board.js";
+import { checkMatch, startGame, difficulty, updateCardPanel, checkGameStatus, flipCount, countNumer, handleClues, statusMessage } from "./board.js";
 import { handleReloadWL, handleStats } from "./user.js";
 document.addEventListener('DOMContentLoaded', () => {
     
@@ -152,6 +152,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {  e.target.classList.add('found') },1500);
                 
             } else {
+
+                if (difficulty == 'memory') { flipCount.innerHTML = 0 }
                 
                 setTimeout(() => { e.target.classList.add('facedown') },1500);
 
