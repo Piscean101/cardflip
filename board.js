@@ -510,6 +510,6 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
         startClock(time);
     }
     
-    if (!clues) { cluePanelBody.classList.add('hidden')};
+    if (clues) { cluePanelBody.classList.remove('hidden')};
 
 };
