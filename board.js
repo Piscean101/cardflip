@@ -509,7 +509,11 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
         updateCardPanel();
         startClock(time);
     }
-    
+
+    const noClue = Math.random();
+
+    noClue >= 0.5 ? clues-- : null;
+     
     if (clues) { cluePanelBody.classList.remove('hidden')};
 
 };
