@@ -420,26 +420,26 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
     switch(level) {
 
         case 'easy':
-            number = pickRandom([7,8,9]);
+            number = pickRandom([7,8,9,10]);
             count = number - pickRandom([2,3]);
             attempts = pickRandom([20,22,25]);
             number >= 10 ? clues = 2 : clues = 1;
             time = pickRandom([75,75,80,90,100]);
             break;
         case 'medium':
-            number = pickRandom([8,9,10,11,12]);
+            number = pickRandom([10,11,12,13]);
             count = number - pickRandom([1,2,3]);
-            attempts = pickRandom([18,20,22,25]);
-            number >= 11 ? clues = 2 : clues = 1;
+            attempts = pickRandom([18,19,20,21,22,23]);
+            number >= 13 ? clues = 2 : clues = 1;
             count >= 9 ? count-- : null;
             time = pickRandom([50,60,75,80,90]);
             break;
         case 'hard':
-            number = pickRandom([12,13,13,13,14,15]);
-            count = number - pickRandom([4,5,6,6]);
+            number = pickRandom([13,14,14,15,15,16,17,18]);
+            count = number - pickRandom([4,4,5,6]);
             count >= 9 ? count-- : count+=2;
             attempts = pickRandom([23,23,24,25,26]);
-            number >= 15 ? clues = 2 : number >= 14 ? clues = 1 : clues = 0;
+            number >= 17 ? clues = 2 : number >= 15 ? clues = 1 : clues = 0;
             time = pickRandom([50,55,60,60,75]);
             break;
         case 'exhibition':
@@ -512,7 +512,7 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
 
     const noClue = Math.random();
 
-    noClue >= 0.5 ? clues-- : null;
+    noClue >= 0.35 ? clues-- : null;
      
     if (clues) { cluePanelBody.classList.remove('hidden')};
 
