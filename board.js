@@ -18,6 +18,7 @@ export var flipCount = document.getElementById("flipCount");
 export var [numberHold,countHold,expHold] = [0,0,0];
 export var cluesUsed = 0;
 export var winStatus = false;
+var streakHolder = 0;
 
 export function updateCardPanel() {
     cardPanel.length ? cardPanelBody.innerHTML = cardPanel.shift().innerHTML : null;
@@ -203,15 +204,18 @@ export function nextLevel(next=true,exp=expHold) {
 
     }
 
-    if (currentStreak) {
+    // if (currentStreak) {
 
-        localStorage.setItem("streak", currentStreak + 1);
+    //     localStorage.setItem("streak", streakHolder + 1);
 
-    } else {
+    // } else {
 
-        localStorage.setItem("streak", 1);
+    //     localStorage.setItem("streak", 1);
 
-    }
+    // }
+
+    localStorage.setItem("streak", streakHolder + 1);
+
 
     currentStreak = Number(localStorage.getItem("streak"));
     longestStreak = Number(localStorage.getItem("record"));
@@ -416,6 +420,8 @@ export function calcExp(number,count) {
 export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1,time=90) {
 
     var exp = 0;
+    streakHolder = Number(localStorage.getItem("streak"));
+    localStorage.setItem("streak",0);
     
     switch(level) {
 
@@ -427,19 +433,19 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
             time = pickRandom([75,75,80,90,100]);
             break;
         case 'medium':
-            number = pickRandom([10,11,12,13]);
-            count = number - pickRandom([1,2,3]);
+            number = pickRandom([10,11,11,12,12,13]);
+            count = number - pickRandom([1,2,2,3]);
             attempts = pickRandom([18,19,20,21,22,23]);
             number >= 13 ? clues = 2 : clues = 1;
             count >= 9 ? count-- : null;
             time = pickRandom([50,60,75,80,90]);
             break;
         case 'hard':
-            number = pickRandom([13,14,14,15,15,16,17,18]);
+            number = pickRandom([14,15,15,16,16,17,18,19,20]);
             count = number - pickRandom([4,4,5,6]);
             count >= 9 ? count-- : count+=2;
             attempts = pickRandom([23,23,24,25,26]);
-            number >= 17 ? clues = 2 : number >= 15 ? clues = 1 : clues = 0;
+            number >= 19 ? clues = 2 : number >= 17 ? clues = 1 : clues = 0;
             time = pickRandom([50,55,60,60,75]);
             break;
         case 'exhibition':
@@ -514,6 +520,6 @@ export function startGame(level=difficulty,number=10,count=6,attempts=25,clues=1
 
     noClue >= 0.35 ? clues-- : null;
      
-    if (clues) { cluePanelBody.classList.remove('hidden')};
+    if (clues > 0) { cluePanelBody.classList.remove('hidden')};
 
 };
